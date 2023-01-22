@@ -1,26 +1,8 @@
 
 <p style="color:blue"><strong> Click here to test the execution in terminal</strong></p>
 
-```execute-1
+```execute-all
 echo "Hello, Welcome to Partner workshop session"
-```
-
-<p style="color:blue"><strong> Click here to check the Tanzu version</strong></p>
-
-```execute
-tanzu version
-```
-
-<p style="color:blue"><strong> Click here to check the AZ version</strong></p>
-
-```execute
-az --version
-```
-
-<p style="color:blue"><strong> Click here to check the kubectl version</strong></p>
-
-```execute
-kubectl version
 ```
 
 <p style="color:blue"><strong> Set environment variable </strong></p>
@@ -29,40 +11,41 @@ kubectl version
 export SESSION_NAME={{ session_namespace }}
 ```
 
+<p style="color:blue"><strong> Click here to test the execution in terminal</strong></p>
+
+```execute-1
+ssh -i tap-workshop.pem $SESSION_NAME@10.0.1.62 -o StrictHostKeyChecking=accept-new
+```
+
+<p style="color:blue"><strong> Click here to check the Tanzu version</strong></p>
+
+```execute-1
+tanzu version
+```
+
+<p style="color:blue"><strong> Click here to check the AWS CLI version</strong></p>
+
+```execute
+aws --version
+```
+
+<p style="color:blue"><strong> Click here to check the kubectl version</strong></p>
+
+```execute
+kubectl version
+```
+
 ###### Check below repo to view the workload content: 
 
 ```dashboard:open-url
 url: https://gitea-tapdemo.tap.tanzupartnerdemo.com/tapdemo-user/tanzu-java-web-app
 ```
 
-######  AZ Login command to connect to Azure
-
-```execute
-az login 
-```
-
-###### Set the subscription
-
-```execute
-az account set --subscription 
-```
 
 ###### Provide ACR repo password and execute
 
 ```execute
 export DOCKER_REGISTRY_PASSWORD=
-```
-
-###### Create Kubernetes cluster with 3 nodes and it should take around 5-10 mins to complete, please wait for it to deploy successfully. 
- 
-```execute
-az aks create --resource-group tapdemo-cluster-RG --name {{ session_namespace }}-cluster --subscription a3ac57b4-348f-471f-9938-9cf757e2d033 --node-count 3 --enable-addons monitoring --generate-ssh-keys --node-vm-size Standard_B8ms -z 1 --enable-cluster-autoscaler --min-count 3 --max-count 3
-```
-
-<p style="color:blue"><strong> Get credentials of cluster"{{ session_namespace }}-cluster" </strong></p>
-
-```execute
-az aks get-credentials --resource-group tapdemo-cluster-RG --name {{ session_namespace }}-cluster
 ```
   
 <p style="color:blue"><strong> Docker login to image repo </strong></p>
