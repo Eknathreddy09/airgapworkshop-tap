@@ -86,7 +86,15 @@ imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages
 ```
 
 ```execute-2
+imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/full-tbs-deps-package-repo:1.9.0 --to-tar=$HOME/tbs-full-deps.tar
+```
+
+```execute-2
 scp -i tap-workshop.pem $HOME/tap-packages-$TAP_VERSION.tar $SESSION_NAME@10.0.1.62:$HOME
+```
+
+```execute-2
+scp -i tap-workshop.pem $HOME/tbs-full-deps.tar $SESSION_NAME@10.0.1.62:$HOME
 ```
 
 ```execute-1
@@ -94,7 +102,15 @@ ls -ltrh | grep "$HOME/tap-packages-$TAP_VERSION.tar"
 ```
 
 ```execute-1
+ls -ltrh | grep "$HOME/tbs-full-deps.tar"
+```
+
+```execute-1
 imgpkg copy --tar $HOME/tap-packages-$TAP_VERSION.tar --to-repo $IMGPKG_REGISTRY_HOSTNAME/tap-packages --include-non-distributable-layers --registry-ca-cert-path $REGISTRY_CA_PATH
+```
+
+```execute-1
+imgpkg copy --tar $HOME/tbs-full-deps.tar --to-repo=$IMGPKG_REGISTRY_HOSTNAME/tbs-full-deps --registry-ca-cert-path $REGISTRY_CA_PATH
 ```
 
 <p style="color:blue"><strong> Create a namespace </strong></p>
@@ -111,6 +127,10 @@ tanzu secret registry add tap-registry --server   $IMGPKG_REGISTRY_HOSTNAME --us
 
 ```execute
 tanzu package repository add tanzu-tap-repository --url $IMGPKG_REGISTRY_HOSTNAME/tap-packages:$TAP_VERSION --namespace tap-install
+```
+
+```execute
+tanzu package repository add tbs-full-deps-repository --url $IMGPKG_REGISTRY_HOSTNAME/tbs-full-deps:1.9.0 --namespace tap-install
 ```
 
 <p style="color:blue"><strong> Get the status of the TAP package repository, and ensure the status updates to Reconcile succeeded </strong></p>
