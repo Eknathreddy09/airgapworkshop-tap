@@ -134,7 +134,15 @@ tanzu secret registry add registry-credentials --server   $IMGPKG_REGISTRY_HOSTN
 ```
 
 ```execute
-kubectl create secret git-secret -n tap-install
+echo "YWRtaW4tYWlyZ2FwCg==" | base64 -d
+```
+
+```execute
+echo "V2VsY29tZTExIQo=" | base64 -d
+```
+
+```execute
+kubectl create secret generic git-secret --from-literal=username="YWRtaW4tYWlyZ2FwCg==" --from-literal=password="V2VsY29tZTExIQo=" -n tap-install
 ```
 
 
