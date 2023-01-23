@@ -11,11 +11,13 @@ echo "Hello, Welcome to Partner workshop session"
 export SESSION_NAME={{ session_namespace }}
 ```
 
-<p style="color:blue"><strong> Click here to test the execution in terminal</strong></p>
+<p style="color:blue"><strong> Connect to JB from Terminal-1 </strong></p>
 
 ```execute-1
 ssh -i tap-workshop.pem $SESSION_NAME@10.0.1.62 -o StrictHostKeyChecking=accept-new
 ```
+
+Now, you have access to two terminals i.e.,  Terminal-1 is a restricted environment with no access to Internet and terminal-2 is the workshop session with internet access. 
 
 <p style="color:blue"><strong> Click here to check the Tanzu version</strong></p>
 
@@ -37,7 +39,7 @@ kubectl version
 
 Note: Since we are deploying TAP on TKGm cluster, cluster essentials is not being installed. If you are installing TAP on any other K8s cluster, the follow the steps in https://docs.vmware.com/en/Cluster-Essentials-for-VMware-Tanzu/1.4/cluster-essentials/deploy.html for installing Cluster essentials. 
 
-<p style="color:blue"><strong> Set the context</strong></p>
+<p style="color:blue"><strong> Set the context to workload cluster</strong></p>
 
 ```execute
 kubectl config use-context {{ session_namespace }}-admin@{{ session_namespace }}
@@ -74,11 +76,11 @@ export TAP_VERSION=1.4.0
 ```
 
 ```execute-1
-export REGISTRY_CA_PATH=/home/tap-airgap-w01-s001/harborairgap.tanzupartnerdemo.com.crt
+export REGISTRY_CA_PATH=/home/{{ session_namespace }}/harborairgap.tanzupartnerdemo.com.crt
 ```
 
 ```execute-1
-export cadata=$(yq  '.clusters[] | select (.name == "{{ session_namespace }}") | .cluster.certificate-authority-data' /home/tap-airgap-w01-s001/config)
+export cadata=$(yq  '.clusters[] | select (.name == "{{ session_namespace }}") | .cluster.certificate-authority-data' /home/{{ session_namespace }}/config)
 ```
 
 ```execute-2
