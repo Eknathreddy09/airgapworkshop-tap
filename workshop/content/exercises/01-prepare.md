@@ -107,13 +107,19 @@ kubectl create ns tap-install
 tanzu secret registry add tap-registry --server   $IMGPKG_REGISTRY_HOSTNAME --username $IMGPKG_REGISTRY_USERNAME --password $IMGPKG_REGISTRY_PASSWORD --namespace tap-install --export-to-all-namespaces --yes
 ```
 
+<p style="color:blue"><strong> Add the package repository </strong></p>
+
 ```execute
 tanzu package repository add tanzu-tap-repository --url $IMGPKG_REGISTRY_HOSTNAME/tap-packages:$TAP_VERSION --namespace tap-install
 ```
 
+<p style="color:blue"><strong> Get the status of the TAP package repository, and ensure the status updates to Reconcile succeeded </strong></p>
+
 ```execute
 tanzu package repository get tanzu-tap-repository --namespace tap-install
 ```
+
+<p style="color:blue"><strong>  List the available packages </strong></p>
 
 ```execute
 tanzu package available list --namespace tap-install
