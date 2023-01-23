@@ -40,7 +40,7 @@ Note: Since we are deploying TAP on TKGm cluster, cluster essentials is not bein
 <p style="color:blue"><strong> Set the context</strong></p>
 
 ```execute
-kubectl config use-context $SESSION_NAME-admin@$SESSION_NAME
+kubectl config use-context {{ session_namespace }}-admin@{{ session_namespace }}
 ```
 
 <p style="color:blue"><strong> Check if the current context is set to "{{ session_namespace }}"</strong></p>
@@ -75,6 +75,10 @@ export TAP_VERSION=1.4.0
 
 ```execute-all
 export REGISTRY_CA_PATH=PATH-TO-CA
+```
+
+```execute-1
+export cadata=$(yq  '.clusters[] | select (.name == "{{ session_namespace }}") | .cluster.certificate-authority-data' /home/tap-airgap-w01-s001/config)
 ```
 
 ```execute-2
