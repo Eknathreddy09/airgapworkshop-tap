@@ -35,7 +35,7 @@ aws --version
 kubectl version
 ```
 
-Note: Since we are deploying TAP on TKGm cluster, cluster essentials is not being installed. If you are installing TAP on any other K8s cluster, the follow the steps in for installing Cluster essentials. 
+Note: Since we are deploying TAP on TKGm cluster, cluster essentials is not being installed. If you are installing TAP on any other K8s cluster, the follow the steps in https://docs.vmware.com/en/Cluster-Essentials-for-VMware-Tanzu/1.4/cluster-essentials/deploy.html for installing Cluster essentials. 
 
 <p style="color:blue"><strong> Set the context</strong></p>
 
@@ -50,7 +50,15 @@ kubectl config get-contexts
 ```
 
 ```execute-all
-docker login harborairgap.tanzupartnerdemo.com
+export IMGPKG_REGISTRY_USERNAME=admin
+```
+
+```execute-all
+export IMGPKG_REGISTRY_PASSWORD=Harbor12345
+```
+
+```execute-all
+docker login harborairgap.tanzupartnerdemo.com -u $IMGPKG_REGISTRY_USERNAME -p $IMGPKG_REGISTRY_PASSWORD
 ```
 
 ```execute-2
@@ -59,14 +67,6 @@ docker login registry.tanzu.vmware.com
 
 ```execute-all
 export IMGPKG_REGISTRY_HOSTNAME=harborairgap.tanzupartnerdemo.com/$SESSION_NAME
-```
-
-```execute-all
-export IMGPKG_REGISTRY_USERNAME=admin
-```
-
-```execute-all
-export IMGPKG_REGISTRY_PASSWORD=Harbor12345
 ```
 
 ```execute-all
@@ -86,7 +86,11 @@ imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages
 ```
 
 ```execute-2
-scp -i tap-workshop.pem $HOME/tap-packages-$TAP_VERSION.tar $SESSION_NAME@$HOME
+scp -i tap-workshop.pem $HOME/tap-packages-$TAP_VERSION.tar $SESSION_NAME@10.0.1.62:$HOME
+```
+
+```execute-1
+ls -ltrh | grep "$HOME/tap-packages-$TAP_VERSION.tar"
 ```
 
 ```execute-1
@@ -119,32 +123,16 @@ tanzu package available list --namespace tap-install
 tanzu package available list tap.tanzu.vmware.com --namespace tap-install
 ```
 
-![Cluster Context](images/prepare-1.png)
-
-![Secret Tap Registry](images/prepare-4.png)
-
-
 ```
 tanzu secret registry add registry-credentials --server   $IMGPKG_REGISTRY_HOSTNAME --username $IMGPKG_REGISTRY_USERNAME --password $IMGPKG_REGISTRY_PASSWORD --namespace tap-install --export-to-all-namespaces --yes
 ```
 
-![Secret Registry Credentials](images/prepare-5.png)
-
-<p style="color:blue"><strong> Verify the pods in kapp-controller namespace  and secretgen-controller </strong></p>
-
 ```execute
-kubectl get pods -n kapp-controller
+kubectl create secret git-secret -n tap-install
 ```
 
-```execute
-kubectl get pods -n secretgen-controller
-```
 
 <p style="color:blue"><strong> Changes to tap values file" </strong></p>
-
-```execute
-sed -i -r "s/password-registry/$DOCKER_REGISTRY_PASSWORD/g" $HOME/tap-values.yaml
-```
 
 ```execute
 sed -i -r "s/SESSION_NAME/$SESSION_NAME/g" $HOME/tap-values.yaml
