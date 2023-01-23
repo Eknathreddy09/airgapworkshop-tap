@@ -4,32 +4,10 @@
 cat $HOME/tap-values.yaml
 ```
 
-<p style="color:blue"><strong> Add the package repository </strong></p>
-
-```execute
-sudo tanzu package repository add tanzu-tap-repository --url tapworkshopoperators.azurecr.io/tap1.3/tap-demo/tap-packages:1.3.2 --namespace tap-install
-```
-
-![Install](images/install-1.png)
-
-<p style="color:blue"><strong> Get the status of the TAP package repository, and ensure the status updates to Reconcile succeeded </strong></p>
-
-```execute
-sudo tanzu package repository get tanzu-tap-repository --namespace tap-install
-```
-
-![Install](images/install-2.png)
-
-<p style="color:blue"><strong>  List the available packages </strong></p>
-
-```execute
-sudo tanzu package available list --namespace tap-install
-```
-
 <p style="color:blue"><strong> Install Tanzu package with full profile</strong></p>
 
 ```execute
-sudo tanzu package install tap -p tap.tanzu.vmware.com -v 1.3.2 --values-file $HOME/tap-values.yaml -n tap-install
+sudo tanzu package install tap -p tap.tanzu.vmware.com -v 1.4.0 --values-file $HOME/tap-values.yaml -n tap-install
 ```
 
 ![Install](images/install-3.png)
