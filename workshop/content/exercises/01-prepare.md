@@ -35,32 +35,59 @@ aws --version
 kubectl version
 ```
 
-###### Check below repo to view the workload content: 
+Note: Since we are deploying TAP on TKGm cluster, cluster essentials is not being installed. If you are installing TAP on any other K8s cluster, the follow the steps in for installing Cluster essentials. 
 
-```dashboard:open-url
-url: https://gitea-tapdemo.tap.tanzupartnerdemo.com/tapdemo-user/tanzu-java-web-app
-```
-
-
-###### Provide ACR repo password and execute
+<p style="color:blue"><strong> Set the context</strong></p>
 
 ```execute
-export DOCKER_REGISTRY_PASSWORD=
-```
-  
-<p style="color:blue"><strong> Docker login to image repo </strong></p>
-
-```execute
-docker login tapworkshopoperators.azurecr.io -u tapworkshopoperators -p $DOCKER_REGISTRY_PASSWORD
+kubectl config use-context $SESSION_NAME-admin@$SESSION_NAME
 ```
 
-<p style="color:blue"><strong> Check if the current context is set to "{{ session_namespace }}-cluster" </strong></p>
+<p style="color:blue"><strong> Check if the current context is set to "{{ session_namespace }}"</strong></p>
 
 ```execute
 kubectl config get-contexts
 ```
 
-![Cluster Context](images/prepare-1.png)
+```execute-all
+docker login harborairgap.tanzupartnerdemo.com
+```
+
+```execute-2
+docker login registry.tanzu.vmware.com
+```
+
+```execute-all
+export IMGPKG_REGISTRY_HOSTNAME=harborairgap.tanzupartnerdemo.com/$SESSION_NAME
+```
+
+```execute-all
+export IMGPKG_REGISTRY_USERNAME=admin
+```
+
+```execute-all
+export IMGPKG_REGISTRY_PASSWORD=Harbor12345
+```
+
+```execute-all
+export TAP_VERSION=1.4.0
+```
+
+```execute-all
+export REGISTRY_CA_PATH=PATH-TO-CA
+```
+
+```execute-2
+imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:$TAP_VERSION --to-tar $HOME/tap-packages-$TAP_VERSION.tar --include-non-distributable-layers
+```
+
+```execute-2
+scp -i tap-workshop.pem $HOME/tap-packages-$TAP_VERSION.tar $SESSION_NAME@$HOME
+```
+
+```execute-1
+imgpkg copy --tar $HOME/tap-packages-$TAP_VERSION.tar --to-repo $IMGPKG_REGISTRY_HOSTNAME/tap-packages --include-non-distributable-layers --registry-ca-cert-path $REGISTRY_CA_PATH
+```
 
 <p style="color:blue"><strong> Create a namespace </strong></p>
 
@@ -68,53 +95,33 @@ kubectl config get-contexts
 kubectl create ns tap-install
 ```
 
-<p style="color:blue"><strong> Set environment variable </strong></p>
-
-![Env](images/prepare-2.png)
-
 ```execute
-export INSTALL_BUNDLE=registry.tanzu.vmware.com/tanzu-cluster-essentials/cluster-essentials-bundle@sha256:54bf611711923dccd7c7f10603c846782b90644d48f1cb570b43a082d18e23b9
-export INSTALL_REGISTRY_HOSTNAME=registry.tanzu.vmware.com
-```
-
-<p style="color:blue"><strong> Provide Tanzu network username and execute in terminal </strong></p>
-  
-*Note:* Just click on below command and paste in terminal 1, provide your <Tanzu Network Registry username> and press *ENTER* 
-
-```copy-and-edit
-export INSTALL_REGISTRY_USERNAME=<Tanzu Network Registry username>
-```
-
-<p style="color:blue"><strong> Provide the Tanzu network password and execute in terminal </strong></p>
-  
-*Note:* Just click on below command and paste in terminal 1, provide your <Tanzu Network password> and press *ENTER* 
-
-```copy-and-edit
-export INSTALL_REGISTRY_PASSWORD=<Tanzu Network password>
+tanzu secret registry add tap-registry --server   $IMGPKG_REGISTRY_HOSTNAME --username $IMGPKG_REGISTRY_USERNAME --password $IMGPKG_REGISTRY_PASSWORD --namespace tap-install --export-to-all-namespaces --yes
 ```
 
 ```execute
-cd $HOME/tanzu-cluster-essentials
+tanzu package repository add tanzu-tap-repository --url $IMGPKG_REGISTRY_HOSTNAME/tap-packages:$TAP_VERSION --namespace tap-install
 ```
-
-<p style="color:blue"><strong> Install cluster essentials in {{ session_namespace }}-cluster  </strong></p>
 
 ```execute
-./install.sh -y
+tanzu package repository get tanzu-tap-repository --namespace tap-install
 ```
-
-![Cluster Essentials](images/prepare-3.png)
-
-<p style="color:blue"><strong> Create tap-registry secret </strong></p>
 
 ```execute
-sudo tanzu secret registry add tap-registry --username tapworkshopoperators --password $DOCKER_REGISTRY_PASSWORD --server tapworkshopoperators.azurecr.io --export-to-all-namespaces --yes --namespace tap-install
+tanzu package available list --namespace tap-install
 ```
+
+```execute
+tanzu package available list tap.tanzu.vmware.com --namespace tap-install
+```
+
+![Cluster Context](images/prepare-1.png)
 
 ![Secret Tap Registry](images/prepare-4.png)
 
-```execute
-kubectl create secret docker-registry registry-credentials --docker-server=tapworkshopoperators.azurecr.io --docker-username=tapworkshopoperators --docker-password=$DOCKER_REGISTRY_PASSWORD -n tap-install
+
+```
+tanzu secret registry add registry-credentials --server   $IMGPKG_REGISTRY_HOSTNAME --username $IMGPKG_REGISTRY_USERNAME --password $IMGPKG_REGISTRY_PASSWORD --namespace tap-install --export-to-all-namespaces --yes
 ```
 
 ![Secret Registry Credentials](images/prepare-5.png)
@@ -133,10 +140,6 @@ kubectl get pods -n secretgen-controller
 
 ```execute
 sed -i -r "s/password-registry/$DOCKER_REGISTRY_PASSWORD/g" $HOME/tap-values.yaml
-```
-
-```execute
-sed -i -r "s/password-registry/$DOCKER_REGISTRY_PASSWORD/g" $HOME/autoheal.sh
 ```
 
 ```execute
