@@ -73,8 +73,8 @@ export IMGPKG_REGISTRY_PASSWORD=Harbor12345
 export TAP_VERSION=1.4.0
 ```
 
-```execute-all
-export REGISTRY_CA_PATH=PATH-TO-CA
+```execute-1
+export REGISTRY_CA_PATH=/home/tap-airgap-w01-s001/harborairgap.tanzupartnerdemo.com.crt
 ```
 
 ```execute-1
@@ -149,3 +149,8 @@ sed -i -r "s/password-registry/$DOCKER_REGISTRY_PASSWORD/g" $HOME/tap-values.yam
 ```execute
 sed -i -r "s/SESSION_NAME/$SESSION_NAME/g" $HOME/tap-values.yaml
 ```
+
+```execute
+sed -i -r "s/providecadata/$cadata/g" $HOME/tap-values.yaml
+```
+
