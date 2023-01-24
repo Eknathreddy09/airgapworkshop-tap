@@ -6,7 +6,7 @@ modules:
     - setup-environment
     - exercises/01-prepare
     - exercises/02-installtap
-    - exercises/03-pinnipedauth
+    - exercises/03-reposilite
     - exercises/04-workload
     - exercises/05-tapgui
     - exercises/06-supplychain
