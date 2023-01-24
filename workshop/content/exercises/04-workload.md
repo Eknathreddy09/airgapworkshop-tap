@@ -45,13 +45,17 @@ sudo tanzu package installed list -A
 ```
 
 ```execute
-sudo tanzu apps workload create {{ session_namespace }}  --git-repo https://gitea-tapdemo.tap.tanzupartnerdemo.com/tapdemo-user/partnertapdemo --git-branch main --type web --label apps.tanzu.vmware.com/has-tests=true --label app.kubernetes.io/part-of=partnertapdemo -n tap-workload --yes
+git clone https://giteaairgap.tap.tanzupartnerdemo.com/admin-airgap/tanzu-java-web-app
+```
+
+```execute
+tanzu apps workload create {{ session_namespace }}-app --git-repo https://giteaairgap.tap.tanzupartnerdemo.com/admin-airgap/tanzu-java-web-app --git-branch main --type web -n tap-workload --source-image harborairgap.tanzupartnerdemo.com/{{ session_namespace }}/build-service/tanzu-java-web-app-source-new --param-yaml buildServiceBindings='[{"name": "settings-xml", "kind": "Secret"}, {"name": "ca-certificate", "kind": "Secret"}]' --build-env "BP_MAVEN_BUILD_ARGUMENTS=-debug -Dmaven.test.skip=true --no-transfer-progress package"
 ```
 
 <p style="color:blue"><strong> Get the status of deployed application </strong></p>
 
 ```execute
-sudo tanzu apps workload get {{ session_namespace }} -n tap-install
+sudo tanzu apps workload get {{ session_namespace }}-app -n tap-install
 ```
 
 *Note:* Ignore below error, it is expected. 
@@ -61,7 +65,7 @@ sudo tanzu apps workload get {{ session_namespace }} -n tap-install
 <p style="color:blue"><strong> Check the live progress of application</strong></p>
 
 ```execute-2
-sudo tanzu apps workload tail {{ session_namespace }} --since 10m --timestamp -n tap-workload
+sudo tanzu apps workload tail {{ session_namespace }}-app --since 10m --timestamp -n tap-workload
 ```
 
 <p style="color:blue"><strong> Check all the installed applications </strong></p>
@@ -79,7 +83,7 @@ kubectl get pods -n tap-workload
 ###### Note: Workload creation takes 5 mins to complete, proceed further once you see ready status
 
 ```execute
-sudo tanzu apps workload get {{ session_namespace }} -n tap-workload
+sudo tanzu apps workload get {{ session_namespace }}-app -n tap-workload
 ```
 
 ![Workload](images/workload-2.png)
@@ -87,7 +91,7 @@ sudo tanzu apps workload get {{ session_namespace }} -n tap-workload
 ###### Apply Annotation
 
 ```execute
-tanzu apps workload apply {{ session_namespace }} --annotation autoscaling.knative.dev/minScale=1 -n tap-workload -y
+tanzu apps workload apply {{ session_namespace }}-app --annotation autoscaling.knative.dev/minScale=1 -n tap-workload -y
 ```
 
 ```terminal:interrupt
@@ -107,7 +111,7 @@ kubectl get svc envoy -n tanzu-system-ingress -o jsonpath='{.status.loadBalancer
 <p style="color:blue"><strong> Access the deployed application </strong></p>
 
 ```dashboard:open-url
-url: http://{{ session_namespace }}.tap-workload.{{ session_namespace }}.demo.tanzupartnerdemo.com
+url: http://{{ session_namespace }}-app.tap-workload.{{ session_namespace }}.demo.tanzupartnerdemo.com
 ```
 
 ![Workload](images/workload-3.png)
@@ -120,7 +124,7 @@ url: https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.3/tap/GUID-s
 ```
 
 ```execute
-sudo tanzu apps workload list -n tap-install
+sudo tanzu apps workload list -n tap-workload
 ```
 
 Note: Image is already created for this workshop and uploaded to ACR. 
