@@ -11,8 +11,8 @@ modules:
     exercises/02-installtap:
         name: Install TAP with full profile
         exit_sign: Authentication
-    exercises/03-pinnipedauth:
-        name: Setup Authentication with pinniped
+    exercises/03-reposilite:
+        name: Setup Reposilite
         exit_sign: workload
     exercises/04-workload:
         name: Deploy workload
