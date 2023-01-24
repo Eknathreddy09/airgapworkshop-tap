@@ -10,7 +10,7 @@ modules:
         exit_sign: Next
     exercises/02-installtap:
         name: Install TAP with full profile
-        exit_sign: Authentication
+        exit_sign: Setup Reposilite
     exercises/03-reposilite:
         name: Setup Reposilite
         exit_sign: workload
