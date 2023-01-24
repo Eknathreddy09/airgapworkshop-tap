@@ -12,10 +12,14 @@ cat $HOME/tekton-pipeline.yaml
 cat $HOME/scanpolicy.yaml
 ```
 
+```execute
+kubectl create ns tap-workload
+```
+
 <p style="color:blue"><strong> Setup developer namespace </strong></p>
 
 ```execute
-kubectl apply -f $HOME/developer.yaml -n tap-install
+kubectl apply -f $HOME/developer.yaml -n tap-workload
 ```
 
 <p style="color:blue"><strong> Deploy Tekton pipeline </strong></p>
@@ -30,29 +34,18 @@ kubectl apply -f $HOME/tekton-pipeline.yaml -n tap-install
 kubectl apply -f $HOME/scanpolicy.yaml -n tap-install
 ```
 
+```execute
+kubectl apply -f $HOME/settings-xml.yaml -n tap-workload
+```
+
 <p style="color:blue"><strong> List the packages installed </strong></p>
 
 ```execute
 sudo tanzu package installed list -A
 ```
 
-###### Execute the below Auto heal script
-
-```
-source ~/autoheal.sh
-```
-
 ```execute
-sudo tanzu package installed list -A
-```
-
-![Installed Package](images/install-5.png)
-
-###### If all the packages are installed successfully, now its time to deploy an application on TAP. Provide the gitrepo that you have forked in the beginning. 
-
-
-```execute
-sudo tanzu apps workload create {{ session_namespace }}  --git-repo https://gitea-tapdemo.tap.tanzupartnerdemo.com/tapdemo-user/partnertapdemo --git-branch main --type web --label apps.tanzu.vmware.com/has-tests=true --label app.kubernetes.io/part-of=partnertapdemo -n tap-install --yes
+sudo tanzu apps workload create {{ session_namespace }}  --git-repo https://gitea-tapdemo.tap.tanzupartnerdemo.com/tapdemo-user/partnertapdemo --git-branch main --type web --label apps.tanzu.vmware.com/has-tests=true --label app.kubernetes.io/part-of=partnertapdemo -n tap-workload --yes
 ```
 
 <p style="color:blue"><strong> Get the status of deployed application </strong></p>
@@ -68,25 +61,25 @@ sudo tanzu apps workload get {{ session_namespace }} -n tap-install
 <p style="color:blue"><strong> Check the live progress of application</strong></p>
 
 ```execute-2
-sudo tanzu apps workload tail {{ session_namespace }} --since 10m --timestamp -n tap-install
+sudo tanzu apps workload tail {{ session_namespace }} --since 10m --timestamp -n tap-workload
 ```
 
 <p style="color:blue"><strong> Check all the installed applications </strong></p>
 
 ```execute
-sudo tanzu apps workload list -n tap-install
+sudo tanzu apps workload list -n tap-workload
 ```
 
 <p style="color:blue"><strong> Get the pods in tap-install namespace </strong></p>
 
 ```execute
-kubectl get pods -n tap-install
+kubectl get pods -n tap-workload
 ```
 
 ###### Note: Workload creation takes 5 mins to complete, proceed further once you see ready status
 
 ```execute
-sudo tanzu apps workload get {{ session_namespace }} -n tap-install
+sudo tanzu apps workload get {{ session_namespace }} -n tap-workload
 ```
 
 ![Workload](images/workload-2.png)
@@ -94,7 +87,7 @@ sudo tanzu apps workload get {{ session_namespace }} -n tap-install
 ###### Apply Annotation
 
 ```execute
-tanzu apps workload apply {{ session_namespace }} --annotation autoscaling.knative.dev/minScale=1 -n tap-install -y
+tanzu apps workload apply {{ session_namespace }} --annotation autoscaling.knative.dev/minScale=1 -n tap-workload -y
 ```
 
 ```terminal:interrupt
@@ -114,7 +107,7 @@ kubectl get svc envoy -n tanzu-system-ingress -o jsonpath='{.status.loadBalancer
 <p style="color:blue"><strong> Access the deployed application </strong></p>
 
 ```dashboard:open-url
-url: http://{{ session_namespace }}.tap-install.{{ session_namespace }}.demo.tanzupartnerdemo.com
+url: http://{{ session_namespace }}.tap-workload.{{ session_namespace }}.demo.tanzupartnerdemo.com
 ```
 
 ![Workload](images/workload-3.png)
