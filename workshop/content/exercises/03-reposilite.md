@@ -56,6 +56,18 @@ mvn package
 scp -i ~/tap-workshop.pem -r /root/.m2/ $SESSION_NAME@10.0.1.62:/home/$SESSION_NAME
 ```
 
+```execute-2
+scp -i ~/tap-workshop.pem $HOME/files/*.pom $SESSION_NAME@10.0.1.62:/home/$SESSION_NAME
+```
+
+```execute-2
+scp -i ~/tap-workshop.pem $HOME/files/*.zip $SESSION_NAME@10.0.1.62:/home/$SESSION_NAME
+```
+
+```execute-2
+scp -i ~/tap-workshop.pem $HOME/files/*.jar $SESSION_NAME@10.0.1.62:/home/$SESSION_NAME
+```
+
 ```execute
 reposilitepod=$(kubectl get pods -o=name --field-selector=status.phase=Running -n reposilite)
 ```
@@ -169,14 +181,6 @@ mv maven-wrapper-0.5.6.jar  org/apache/maven/wrapper/0.5.6/
 ```
 
 ```execute
-mkdir -p org/apache/maven/wrapper/3.1.1/
-```
-
-```execute
-mv maven-wrapper-3.1.1.jar  org/apache/maven/wrapper/3.1.1/
-```
-
-```execute
 mkdir -p org/apache/maven/apache-maven/3.6.3/
 ```
 
@@ -207,3 +211,9 @@ mkdir -p org/apache/maven/apache-maven/3.8.6/
 ```execute
 mv apache-maven-3.8.6-bin.zip  org/apache/maven/apache-maven/3.8.6/
 ```
+
+```execute
+exit
+```
+
+In windows JB, open google chrome and access the url https://{{ session_namespace }}.tap.tanzupartnerdemo.com/ and verify the copied files under releases as shown below: 
