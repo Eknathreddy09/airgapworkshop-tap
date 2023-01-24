@@ -52,3 +52,7 @@ mvn package
 
 ###### create private hosted entry in route 53 pointing to the IP
 
+```execute-2
+scp -i ~/tap-workshop.pem -r /root/.m2/ $SESSION_NAME@10.0.1.62:/home/$SESSION_NAME
+```
+
