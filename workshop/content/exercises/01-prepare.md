@@ -43,6 +43,10 @@ export SESSION_NAME={{ session_namespace }}
 
 Note: Since we are deploying TAP on TKGm cluster, cluster essentials is not being installed. If you are installing TAP on any other K8s cluster, then follow the steps in https://docs.vmware.com/en/Cluster-Essentials-for-VMware-Tanzu/1.4/cluster-essentials/deploy.html for installing Cluster essentials. 
 
+```execute
+cp $HOME/config ~/.kube/
+```
+
 <p style="color:blue"><strong> Set the context to workload cluster</strong></p>
 
 ```execute
@@ -75,10 +79,6 @@ export TAP_VERSION=1.4.0
 
 ```execute-1
 export REGISTRY_CA_PATH=/home/{{ session_namespace }}/harborairgap.tanzupartnerdemo.com.crt
-```
-
-```execute
-cp $HOME/config ~/.kube/
 ```
 
 ```execute-1
@@ -224,4 +224,8 @@ sed -i -r "s/providecadata/$cadata/g" $HOME/tap-values.yaml
 
 ```execute
 sed -i -r "s/reposiliteairgap/$SESSION_NAME/g" $HOME/reprosilite.yaml
+```
+
+```execute
+sed -i -r "s/reposiliteurl/$SESSION_NAME/g" $HOME/settings-xml.yaml
 ```
