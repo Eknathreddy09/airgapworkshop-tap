@@ -69,7 +69,7 @@ scp -i ~/tap-workshop.pem $HOME/files/*.jar $SESSION_NAME@10.0.1.62:/home/$SESSI
 ```
 
 ```execute
-reposilitepod=$(kubectl get pods -o=name --field-selector=status.phase=Running -n reposilite)
+reposilitepod=$(kubectl get pods -n reposilite -o=jsonpath="{.items[*]['metadata.name', 'status.phase=Running']}")
 ```
 
 ```execute
