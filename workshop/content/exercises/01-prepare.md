@@ -129,11 +129,11 @@ scp -i tap-workshop.pem $HOME/tbs-full-deps.tar $SESSION_NAME@10.0.1.62:/home/$S
 <p style="color:blue"><strong> Verify the tar files </strong></p>
 
 ```execute-1
-ls -ltrh | grep "$HOME/tap-packages-$TAP_VERSION.tar"
+ls -ltrh | grep "tap-packages-$TAP_VERSION.tar"
 ```
 
 ```execute-1
-ls -ltrh | grep "$HOME/tbs-full-deps.tar"
+ls -ltrh | grep "tbs-full-deps.tar"
 ```
 
 <p style="color:blue"><strong> Relocate the images with the Carvel tool imgpkg into harbor registry </strong></p>
@@ -192,7 +192,7 @@ tanzu package available list tap.tanzu.vmware.com --namespace tap-install
 
 <p style="color:blue"><strong> Create a registry secret: registry-credentials </strong></p>
 
-```
+```execute
 tanzu secret registry add registry-credentials --server   $IMGPKG_REGISTRY_HOSTNAME --username $IMGPKG_REGISTRY_USERNAME --password $IMGPKG_REGISTRY_PASSWORD --namespace tap-install --export-to-all-namespaces --yes
 ```
 
