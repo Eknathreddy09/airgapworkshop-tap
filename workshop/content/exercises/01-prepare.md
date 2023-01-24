@@ -13,7 +13,7 @@ export SESSION_NAME={{ session_namespace }}
 
 <p style="color:blue"><strong> Connect to internet restricted instance from Terminal-1 </strong></p>
 
-```execute-1
+```execute
 ssh -i tap-workshop.pem $SESSION_NAME@10.0.1.62 -o StrictHostKeyChecking=accept-new
 ```
 
@@ -21,7 +21,7 @@ ssh -i tap-workshop.pem $SESSION_NAME@10.0.1.62 -o StrictHostKeyChecking=accept-
 
 <p style="color:blue"><strong> Click here to check the Tanzu version</strong></p>
 
-```execute-1
+```execute
 tanzu version
 ```
 
