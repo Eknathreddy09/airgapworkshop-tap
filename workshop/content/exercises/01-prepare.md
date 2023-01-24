@@ -37,6 +37,10 @@ aws --version
 kubectl version
 ```
 
+```execute-all
+export SESSION_NAME={{ session_namespace }}
+```
+
 Note: Since we are deploying TAP on TKGm cluster, cluster essentials is not being installed. If you are installing TAP on any other K8s cluster, then follow the steps in https://docs.vmware.com/en/Cluster-Essentials-for-VMware-Tanzu/1.4/cluster-essentials/deploy.html for installing Cluster essentials. 
 
 <p style="color:blue"><strong> Set the context to workload cluster</strong></p>
@@ -73,13 +77,21 @@ export TAP_VERSION=1.4.0
 export REGISTRY_CA_PATH=/home/{{ session_namespace }}/harborairgap.tanzupartnerdemo.com.crt
 ```
 
+```execute
+cp $HOME/config ~/.kube/
+```
+
 ```execute-1
 export cadata=$(yq  '.clusters[] | select (.name == "{{ session_namespace }}") | .cluster.certificate-authority-data' /home/{{ session_namespace }}/config)
 ```
 
+```execute
+echo $cadata
+```
+
 <p style="color:blue"><strong> Log in to your image registry by running </strong></p>
 
-```execute-all
+```execute
 docker login harborairgap.tanzupartnerdemo.com -u $IMGPKG_REGISTRY_USERNAME -p $IMGPKG_REGISTRY_PASSWORD
 ```
 
@@ -105,13 +117,13 @@ imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/full-tbs-dep
 <p style="color:blue"><strong> Copy the downloaded Tanzu Application Platform tar file to internet restricted instance </strong></p>
 
 ```execute-2
-scp -i tap-workshop.pem $HOME/tap-packages-$TAP_VERSION.tar $SESSION_NAME@10.0.1.62:$HOME
+scp -i tap-workshop.pem $HOME/tap-packages-$TAP_VERSION.tar $SESSION_NAME@10.0.1.62:/home/$SESSION_NAME
 ```
 
 <p style="color:blue"><strong> Copy the downloaded Tanzu build service tar file to internet restricted instance  </strong></p>
 
 ```execute-2
-scp -i tap-workshop.pem $HOME/tbs-full-deps.tar $SESSION_NAME@10.0.1.62:$HOME
+scp -i tap-workshop.pem $HOME/tbs-full-deps.tar $SESSION_NAME@10.0.1.62:/home/$SESSION_NAME
 ```
 
 <p style="color:blue"><strong> Verify the tar files </strong></p>
