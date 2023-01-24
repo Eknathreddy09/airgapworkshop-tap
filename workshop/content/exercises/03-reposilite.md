@@ -57,6 +57,10 @@ scp -i ~/tap-workshop.pem -r /root/.m2/ $SESSION_NAME@10.0.1.62:/home/$SESSION_N
 ```
 
 ```execute
+reposilitepod=$(kubectl get pods -o=name --field-selector=status.phase=Running -n reposilite)
+```
+
+```execute
 kubectl cp .m2/repository/ $reposilitepod:/app/data/repositories/releases -n reposilite
 ```
 
