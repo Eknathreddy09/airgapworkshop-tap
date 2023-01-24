@@ -157,7 +157,7 @@ mv spring-boot-starter-parent-2.6.9.pom org/springframework/boot/spring-boot-sta
 ```
 
 ```execute
-mkdir -p org/springframework/boot/spring-boot-starter-parent/2.5.8/
+mkdir -p org/springframework/boot/spring-boot-starter-parent/2.7.1/
 ```
 
 ```execute
@@ -186,30 +186,6 @@ mkdir -p org/apache/maven/apache-maven/3.6.3/
 
 ```execute
 mv apache-maven-3.6.3-bin.zip  org/apache/maven/apache-maven/3.6.3/
-```
-
-```execute
-mkdir -p org/apache/maven/apache-maven/3.8.1/
-```
-
-```execute
-mv apache-maven-3.8.1-bin.zip  org/apache/maven/apache-maven/3.8.1/
-```
-
-```execute
-mkdir -p org/apache/maven/apache-maven/3.8.2/
-```
-
-```execute
-mv apache-maven-3.8.2-bin.zip  org/apache/maven/apache-maven/3.8.2/
-```
-
-```execute
-mkdir -p org/apache/maven/apache-maven/3.8.6/
-```
-
-```execute
-mv apache-maven-3.8.6-bin.zip  org/apache/maven/apache-maven/3.8.6/
 ```
 
 ```execute
