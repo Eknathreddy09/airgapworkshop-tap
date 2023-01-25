@@ -53,19 +53,19 @@ mvn package
 ###### create private hosted entry in route 53 pointing to the IP
 
 ```execute-2
-scp -i ~/tap-workshop.pem -r /root/.m2/ $SESSION_NAME@10.0.1.62:/home/$SESSION_NAME
+scp -i ~/tap-workshop.pem -r /root/.m2/ $SESSION_NAME@jb-internetrestricted.tanzupartnerdemo.com:/home/$SESSION_NAME
 ```
 
 ```execute-2
-scp -i ~/tap-workshop.pem $HOME/files/*.pom $SESSION_NAME@10.0.1.62:/home/$SESSION_NAME
+scp -i ~/tap-workshop.pem $HOME/files/*.pom $SESSION_NAME@jb-internetrestricted.tanzupartnerdemo.com:/home/$SESSION_NAME
 ```
 
 ```execute-2
-scp -i ~/tap-workshop.pem $HOME/files/*.zip $SESSION_NAME@10.0.1.62:/home/$SESSION_NAME
+scp -i ~/tap-workshop.pem $HOME/files/*.zip $SESSION_NAME@jb-internetrestricted.tanzupartnerdemo.com:/home/$SESSION_NAME
 ```
 
 ```execute-2
-scp -i ~/tap-workshop.pem $HOME/files/*.jar $SESSION_NAME@10.0.1.62:/home/$SESSION_NAME
+scp -i ~/tap-workshop.pem $HOME/files/*.jar $SESSION_NAME@jb-internetrestricted.tanzupartnerdemo.com:/home/$SESSION_NAME
 ```
 
 ```execute
