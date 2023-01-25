@@ -12,8 +12,6 @@ tanzu package install tap -p tap.tanzu.vmware.com -v 1.4.0 --values-file $HOME/t
 
 Note: This process takes about 5-10 mins to complete. If you see any reconcile errors, please let us know.
 
-
-
 <p style="color:blue"><strong> List the packages installed </strong></p>
 
 ```execute
