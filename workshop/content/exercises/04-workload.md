@@ -41,7 +41,7 @@ kubectl apply -f $HOME/settings-xml.yaml -n tap-workload
 <p style="color:blue"><strong> List the packages installed </strong></p>
 
 ```execute
-sudo tanzu package installed list -A
+tanzu package installed list -A
 ```
 
 ```execute
