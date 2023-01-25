@@ -34,6 +34,10 @@ kubectl apply -f $HOME/scanpolicy.yaml -n tap-install
 kubectl apply -f $HOME/settings-xml.yaml -n tap-workload
 ```
 
+```execute
+kubectl apply -f $HOME/ca-certificate -n tap-workload
+```
+
 <p style="color:blue"><strong> List the packages installed </strong></p>
 
 ```execute
@@ -45,6 +49,7 @@ tanzu package installed list -A
 file: /home/tap-airgap-w01-s001/tanzu-java-web-app/.mvn/wrapper/maven-wrapper.properties
 text: "reposiliteairgap"
 ```
+
 * Update the value of `distributionUrl` and `wrapperUrl`
 ```editor:replace-text-selection
 file: /home/tap-airgap-w01-s001/tanzu-java-web-app/.mvn/wrapper/maven-wrapper.properties
@@ -56,6 +61,7 @@ text: {{ session_namespace }}
 file: /home/tap-airgap-w01-s001/tanzu-java-web-app/mvnw
 text: "reposiliteairgap"
 ```
+
 * Update the value of `jarUrl`
 ```editor:replace-text-selection
 file: /home/tap-airgap-w01-s001/tanzu-java-web-app/mvnw
@@ -67,6 +73,7 @@ text: {{ session_namespace }}
 file: /home/tap-airgap-w01-s001/tanzu-java-web-app/mvnw.cmd
 text: "reposiliteairgap"
 ```
+
 * Update the value of `DOWNLOAD_URL`
 ```editor:replace-text-selection
 file: /home/tap-airgap-w01-s001/tanzu-java-web-app/mvnw.cmd
