@@ -159,44 +159,40 @@ url: https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.3/tap/GUID-s
 sudo tanzu apps workload list -n tap-workload
 ```
 
-Note: Image is already created for this workshop and uploaded to ACR. 
+Note: Image is already created for this workshop and uploaded to Harbor Registry. 
 
 ```execute
-tanzu apps workload create {{ session_namespace }}-fromimage --image tapworkshopoperators.azurecr.io/tap13/workshopimage/partnertapdemo-tap-install:latest --type web --app {{ session_namespace }}-fromimage -n tap-install -y
+tanzu apps workload create {{ session_namespace }}-fromimage --image harborairgap.tanzupartnerdemo.com/tapairgap/prebuildimage:latest --type web --app {{ session_namespace }}-fromimage -n tap-workload -y
+```
+
+```execute-1
+tanzu apps workload tail {{ session_namespace }}-fromimage --namespace tap-workload
 ```
 
 ```execute
-sudo tanzu apps workload get {{ session_namespace }}-fromimage -n tap-install
-```
-
-```execute-2
-tanzu apps workload tail {{ session_namespace }}-fromimage --namespace tap-install
+sudo tanzu apps workload get {{ session_namespace }}-fromimage -n tap-workload
 ```
 
 ![Workload from Image](images/fromimage-1.png)
 
-
 <p style="color:blue"><strong> Collect the load balancer IP </strong></p>
 
 ```execute
-kubectl get svc envoy -n tanzu-system-ingress -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
+export envoyloadbalancer=$(kubectl get svc envoy -n tanzu-system-ingress -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+```
+
+```execute
+nslookup $envoyloadbalancer | awk -F': ' 'NR==6 { print $2 } '
 ```
 
 ![Workload from Image](images/fromimage-2.png)
 
-###### Add an entry in local host /etc/hosts path pointing the above collected load balancer IP with {{ session_namespace }}-fromimage.tap-install.{{ session_namespace }}.demo.tanzupartnerdemo.com
+###### Add an entry in local host /etc/hosts path pointing the above collected IP with {{ session_namespace }}-fromimage.tap-workload.tanzupartnerdemo.com
 
 ![Workload from Image](images/fromimage-3.png)
 
 <p style="color:blue"><strong> Access the deployed application </strong></p>
 
 ```dashboard:open-url
-url: http://{{ session_namespace }}-fromimage.tap-install.{{ session_namespace }}.demo.tanzupartnerdemo.com
+url: https://{{ session_namespace }}-fromimage.tap-workload.tanzupartnerdemo.com
 ```
-
-![Workload from Image](images/fromimage-4.png)
-
-```terminal:interrupt
-session: 2
-```
-
