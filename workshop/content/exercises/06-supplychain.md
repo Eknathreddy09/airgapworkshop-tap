@@ -25,22 +25,10 @@ line: 14
 tanzu apps cluster-supply-chain list
 ```
 
-<p style="color:blue"><strong> Check the Scanpolicy resource </strong></p>
-
-```execute
-kubectl get ScanPolicy -n tap-install
-```
-
-<p style="color:blue"><strong> Check the Pipeline resource </strong></p>
-
-```execute
-kubectl get Pipeline -n tap-install
-```
-
 <p style="color:blue"><strong> Connect to TAP GUI </strong></p>
 
 ```dashboard:open-url
-url: http://tap-gui.{{ session_namespace }}.demo.tanzupartnerdemo.com/supply-chain/host/tap-install/{{ session_namespace }}
+url: http://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/supply-chain/host/tap-install/{{ session_namespace }}
 ```
 
 There are two sections within this view:
