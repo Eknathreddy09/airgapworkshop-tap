@@ -14,7 +14,7 @@ export SESSION_NAME={{ session_namespace }}
 <p style="color:blue"><strong> Connect to internet restricted instance from Terminal-1 </strong></p>
 
 ```execute
-ssh -i tap-workshop.pem $SESSION_NAME@10.0.1.62 -o StrictHostKeyChecking=accept-new
+ssh -i tap-workshop.pem $SESSION_NAME@jb-internetrestricted.tanzupartnerdemo.com -o StrictHostKeyChecking=accept-new
 ```
 
 ##### Now, you have access to two terminals i.e.,  Terminal-1 is a restricted environment with no access to Internet and terminal-2 is the workshop session with internet access. 
@@ -23,34 +23,40 @@ ssh -i tap-workshop.pem $SESSION_NAME@10.0.1.62 -o StrictHostKeyChecking=accept-
 
 ```execute
 tanzu version
+
 ```
 
 <p style="color:blue"><strong> Click here to check the AWS CLI version</strong></p>
 
 ```execute
 aws --version
+
 ```
 
 <p style="color:blue"><strong> Click here to check the kubectl version</strong></p>
 
 ```execute
 kubectl version
+
 ```
 
 ```execute-all
 export SESSION_NAME={{ session_namespace }}
+
 ```
 
 Note: Since we are deploying TAP on TKGm cluster, cluster essentials is not being installed. If you are installing TAP on any other K8s cluster, then follow the steps in https://docs.vmware.com/en/Cluster-Essentials-for-VMware-Tanzu/1.4/cluster-essentials/deploy.html for installing Cluster essentials. 
 
 ```execute
 cp $HOME/config ~/.kube/
+
 ```
 
 <p style="color:blue"><strong> Set the context to workload cluster</strong></p>
 
 ```execute
 kubectl config use-context {{ session_namespace }}-admin@{{ session_namespace }}
+
 ```
 
 <p style="color:blue"><strong> Check if the current context is set to "{{ session_namespace }}"</strong></p>
@@ -70,7 +76,7 @@ export IMGPKG_REGISTRY_PASSWORD=Harbor12345
 ```
 
 ```execute-all
-export IMGPKG_REGISTRY_HOSTNAME=harborairgap.tanzupartnerdemo.com/$SESSION_NAME
+export IMGPKG_REGISTRY_HOSTNAME=harborairgap.tanzupartnerdemo.com
 ```
 
 ```execute-all
@@ -117,13 +123,13 @@ imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/full-tbs-dep
 <p style="color:blue"><strong> Copy the downloaded Tanzu Application Platform tar file to internet restricted instance </strong></p>
 
 ```execute-2
-scp -i tap-workshop.pem $HOME/tap-packages-$TAP_VERSION.tar $SESSION_NAME@10.0.1.62:/home/$SESSION_NAME
+scp -i tap-workshop.pem $HOME/tap-packages-$TAP_VERSION.tar $SESSION_NAME@jb-internetrestricted.tanzupartnerdemo.com:/home/$SESSION_NAME
 ```
 
 <p style="color:blue"><strong> Copy the downloaded Tanzu build service tar file to internet restricted instance  </strong></p>
 
 ```execute-2
-scp -i tap-workshop.pem $HOME/tbs-full-deps.tar $SESSION_NAME@10.0.1.62:/home/$SESSION_NAME
+scp -i tap-workshop.pem $HOME/tbs-full-deps.tar $SESSION_NAME@jb-internetrestricted.tanzupartnerdemo.com:/home/$SESSION_NAME
 ```
 
 <p style="color:blue"><strong> Verify the tar files </strong></p>
@@ -139,13 +145,13 @@ ls -ltrh | grep "tbs-full-deps.tar"
 <p style="color:blue"><strong> Relocate the images with the Carvel tool imgpkg into harbor registry </strong></p>
 
 ```execute-1
-imgpkg copy --tar $HOME/tap-packages-$TAP_VERSION.tar --to-repo $IMGPKG_REGISTRY_HOSTNAME/tap-packages --include-non-distributable-layers --registry-ca-cert-path $REGISTRY_CA_PATH
+imgpkg copy --tar $HOME/tap-packages-$TAP_VERSION.tar --to-repo $IMGPKG_REGISTRY_HOSTNAME/$SESSION_NAME/tap-packages --include-non-distributable-layers --registry-ca-cert-path $REGISTRY_CA_PATH
 ```
 
 <p style="color:blue"><strong> Relocate the Tanzu build service images with the Carvel tool imgpkg into harbor registry </strong></p>
 
 ```execute-1
-imgpkg copy --tar $HOME/tbs-full-deps.tar --to-repo=$IMGPKG_REGISTRY_HOSTNAME/tbs-full-deps --registry-ca-cert-path $REGISTRY_CA_PATH
+imgpkg copy --tar $HOME/tbs-full-deps.tar --to-repo=$IMGPKG_REGISTRY_HOSTNAME/$SESSION_NAME/tbs-full-deps --registry-ca-cert-path $REGISTRY_CA_PATH
 ```
 
 <p style="color:blue"><strong> Create a namespace </strong></p>
@@ -154,22 +160,30 @@ imgpkg copy --tar $HOME/tbs-full-deps.tar --to-repo=$IMGPKG_REGISTRY_HOSTNAME/tb
 kubectl create ns tap-install
 ```
 
+```execute
+kubectl create ns tap-workload
+```
+
 <p style="color:blue"><strong> Create a registry secret </strong></p>
 
 ```execute
 tanzu secret registry add tap-registry --server   $IMGPKG_REGISTRY_HOSTNAME --username $IMGPKG_REGISTRY_USERNAME --password $IMGPKG_REGISTRY_PASSWORD --namespace tap-install --export-to-all-namespaces --yes
 ```
 
+```execute
+tanzu secret registry add tap-registry --server   $IMGPKG_REGISTRY_HOSTNAME --username $IMGPKG_REGISTRY_USERNAME --password $IMGPKG_REGISTRY_PASSWORD --namespace tap-workload --export-to-all-namespaces --yes
+```
+
 <p style="color:blue"><strong> Add the package repository </strong></p>
 
 ```execute
-tanzu package repository add tanzu-tap-repository --url $IMGPKG_REGISTRY_HOSTNAME/tap-packages:$TAP_VERSION --namespace tap-install
+tanzu package repository add tanzu-tap-repository --url $IMGPKG_REGISTRY_HOSTNAME/$SESSION_NAME/tap-packages:$TAP_VERSION --namespace tap-install
 ```
 
 <p style="color:blue"><strong> Add the tanzu build service package repository </strong></p>
 
 ```execute
-tanzu package repository add tbs-full-deps-repository --url $IMGPKG_REGISTRY_HOSTNAME/tbs-full-deps:1.9.0 --namespace tap-install
+tanzu package repository add tbs-full-deps-repository --url $IMGPKG_REGISTRY_HOSTNAME/$SESSION_NAME/tbs-full-deps:1.9.0 --namespace tap-install
 ```
 
 <p style="color:blue"><strong> Get the status of the TAP package repository, and ensure the status updates to Reconcile succeeded </strong></p>
@@ -196,6 +210,10 @@ tanzu package available list tap.tanzu.vmware.com --namespace tap-install
 tanzu secret registry add registry-credentials --server   $IMGPKG_REGISTRY_HOSTNAME --username $IMGPKG_REGISTRY_USERNAME --password $IMGPKG_REGISTRY_PASSWORD --namespace tap-install --export-to-all-namespaces --yes
 ```
 
+```execute
+tanzu secret registry add registry-credentials --server   $IMGPKG_REGISTRY_HOSTNAME --username $IMGPKG_REGISTRY_USERNAME --password $IMGPKG_REGISTRY_PASSWORD --namespace tap-workload --export-to-all-namespaces --yes
+```
+
 <p style="color:blue"><strong> Verify the decoded values of harbor registry credentials </strong></p>
 
 ```execute
@@ -210,6 +228,10 @@ echo "V2VsY29tZTExIQo=" | base64 -d
 
 ```execute
 kubectl create secret generic git-secret --from-literal=username="YWRtaW4tYWlyZ2FwCg==" --from-literal=password="V2VsY29tZTExIQo=" -n tap-install
+```
+
+```execute
+kubectl create secret generic git-secret --from-literal=username="YWRtaW4tYWlyZ2FwCg==" --from-literal=password="V2VsY29tZTExIQo=" -n tap-workload
 ```
 
 <p style="color:blue"><strong> Changes to tap values file" </strong></p>
