@@ -12,10 +12,6 @@ cat $HOME/tekton-pipeline.yaml
 cat $HOME/scanpolicy.yaml
 ```
 
-```execute
-kubectl create ns tap-workload
-```
-
 <p style="color:blue"><strong> Setup developer namespace </strong></p>
 
 ```execute
@@ -44,18 +40,47 @@ kubectl apply -f $HOME/settings-xml.yaml -n tap-workload
 tanzu package installed list -A
 ```
 
-```execute
-git clone https://giteaairgap.tap.tanzupartnerdemo.com/admin-airgap/tanzu-java-web-app
+* Open the file to edit the value of mvn wrapper properties 
+```editor:select-matching-text
+file: /home/tap-airgap-w01-s001/tanzu-java-web-app/.mvn/wrapper/maven-wrapper.properties
+text: "reposiliteairgap"
+```
+* Update the value of `distributionUrl` and `wrapperUrl`
+```editor:replace-text-selection
+file: /home/tap-airgap-w01-s001/tanzu-java-web-app/.mvn/wrapper/maven-wrapper.properties
+text: {{ session_namespace }}
+```
+
+* Open the file to edit the value of mvnw and point to reposilite maven repository
+```editor:select-matching-text
+file: /home/tap-airgap-w01-s001/tanzu-java-web-app/mvnw
+text: "reposiliteairgap"
+```
+* Update the value of `jarUrl`
+```editor:replace-text-selection
+file: /home/tap-airgap-w01-s001/tanzu-java-web-app/mvnw
+text: {{ session_namespace }}
+```
+
+* Open the file to edit the value of `DOWNLOAD_URL` env variable
+```editor:select-matching-text
+file: /home/tap-airgap-w01-s001/tanzu-java-web-app/mvnw.cmd
+text: "reposiliteairgap"
+```
+* Update the value of `DOWNLOAD_URL`
+```editor:replace-text-selection
+file: /home/tap-airgap-w01-s001/tanzu-java-web-app/mvnw.cmd
+text: {{ session_namespace }}
 ```
 
 ```execute
-tanzu apps workload create {{ session_namespace }}-app --git-repo https://giteaairgap.tap.tanzupartnerdemo.com/admin-airgap/tanzu-java-web-app --git-branch main --type web -n tap-workload --source-image harborairgap.tanzupartnerdemo.com/{{ session_namespace }}/build-service/tanzu-java-web-app-source-new --param-yaml buildServiceBindings='[{"name": "settings-xml", "kind": "Secret"}, {"name": "ca-certificate", "kind": "Secret"}]' --build-env "BP_MAVEN_BUILD_ARGUMENTS=-debug -Dmaven.test.skip=true --no-transfer-progress package"
+tanzu apps workload create {{ session_namespace }}-app --local-path tanzu-java-web-app/ --type web -n tap-workload --source-image harborairgap.tanzupartnerdemo.com/{{ session_namespace }}/build-service/tanzu-java-web-app-source-new --param-yaml buildServiceBindings='[{"name": "settings-xml", "kind": "Secret"}, {"name": "ca-certificate", "kind": "Secret"}]' --build-env "BP_MAVEN_BUILD_ARGUMENTS=-debug -Dmaven.test.skip=true --no-transfer-progress package"
 ```
 
 <p style="color:blue"><strong> Get the status of deployed application </strong></p>
 
 ```execute
-sudo tanzu apps workload get {{ session_namespace }}-app -n tap-install
+sudo tanzu apps workload get {{ session_namespace }}-app -n tap-workload
 ```
 
 *Note:* Ignore below error, it is expected. 
@@ -111,7 +136,7 @@ kubectl get svc envoy -n tanzu-system-ingress -o jsonpath='{.status.loadBalancer
 <p style="color:blue"><strong> Access the deployed application </strong></p>
 
 ```dashboard:open-url
-url: http://{{ session_namespace }}-app.tap-workload.{{ session_namespace }}.demo.tanzupartnerdemo.com
+url: http://{{ session_namespace }}-app.tap-workload.tanzupartnerdemo.com
 ```
 
 ![Workload](images/workload-3.png)
