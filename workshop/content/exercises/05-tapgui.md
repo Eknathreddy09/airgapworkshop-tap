@@ -26,10 +26,14 @@ kubectl get pods -n tap-gui
 <p style="color:blue"><strong> Collect the load balancer IP </strong></p>
 
 ```execute
-kubectl get svc envoy -n tanzu-system-ingress -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
+export envoyloadbalancer=$(kubectl get svc envoy -n tanzu-system-ingress -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
 ```
 
-###### Add an entry in local host /etc/hosts path pointing the above collected load balancer IP with tap-gui.{{ session_namespace }}.demo.tanzupartnerdemo.com
+```execute
+nslookup $envoyloadbalancer | awk -F': ' 'NR==6 { print $2 } '
+```
+
+###### Add an entry in local host /etc/hosts path pointing the above collected IP with {{ session_namespace }}-fromimage.tap-workload.tanzupartnerdemo.com
 
 Example for ref: 
 
@@ -38,57 +42,21 @@ Example for ref:
 <p style="color:blue"><strong> Access TAP GUI </strong></p>
 
 ```dashboard:open-url
-url: http://tap-gui.{{ session_namespace }}.demo.tanzupartnerdemo.com
+url: http://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com
 ```
 
 Example for ref: 
 
 ![TAP GUI](images/gui-2.png)
 
-##### Integrate Auth (Github) with TAP GUI: 
-
-*Note:* Steps to create your own *client ID*, *client secret* in github are given in below TechDocs page: 
-
-```dashboard:open-url
-url: https://tap-gui.workshop.tap.tanzupartnerdemo.com/docs/default/component/tap-gui-component/github-settings/
-```
-
-###### Remove (#) from lines 69 - 75
-
-```editor:open-file
-file: ~/tap-values.yaml
-```
-
-![TAP GUI](images/gui-3.png)
-
-Replace provideyourclientid with your Github client ID. 
-
-```editor:open-file
-file: ~/tap-values.yaml
-line: 74
-```
-
-Replace provideyourcliensecret with your Github client Secret. 
-
-```editor:open-file
-file: ~/tap-values.yaml
-line: 75
-```
-
-###### Update TAP packages with updated values: 
+TLS for TAP GUI: 
 
 ```execute
-sudo tanzu package installed update tap -f $HOME/tap-values.yaml -n tap-install
+kubectl create secret tls tap-gui-secret --key="privkey.pem" --cert="fullchain.pem" -n tap-gui
 ```
 
-###### Access the TAP GUI, open in incognito window or a different browser. 
+Remove # from lines from 103-105
 
-```dashboard:open-url
-url: http://tap-gui.{{ session_namespace }}.demo.tanzupartnerdemo.com
+```execute
+tanzu package installed update tap -f tap-values.yaml -n tap-install
 ```
-
-###### Authenticate to TAP GUI portal with your github credentials. 
-
-![TAP GUI](images/gui-4.png)
-
-![TAP GUI](images/gui-5.png)
