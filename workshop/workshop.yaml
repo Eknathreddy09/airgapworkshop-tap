@@ -12,10 +12,10 @@ modules:
     - exercises/06-supplychain
     - exercises/07-applive
     - exercises/08-accelerators
-    - exercises/09-Test-scan
-    - exercises/10-APIDocs
-    - exercises/11-metadatastore
-    - exercises/12-TechDocs
-    - exercises/13-security-analysis
+    - exercises/09-servicebinding
+    - exercises/10-gitopsworkflow
+    - exercises/11-grype
+    - exercises/12-externaldb
+    - exercises/13-Innerloop
     - exercises/14-Cleanup
     - workshop-summary
