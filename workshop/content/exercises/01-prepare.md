@@ -14,7 +14,7 @@ export SESSION_NAME={{ session_namespace }}
 <p style="color:blue"><strong> Connect to internet restricted instance from Terminal-1 </strong></p>
 
 ```execute
-ssh -i tap-workshop.pem $SESSION_NAME@jb-internetrestricted.tanzupartnerdemo.com -o StrictHostKeyChecking=accept-new
+ssh -i tap-workshop.pem $SESSION_NAME@10.0.1.62 -o StrictHostKeyChecking=accept-new
 ```
 
 ##### Now, you have access to two terminals i.e.,  Terminal-1 is a restricted environment with no access to Internet and terminal-2 is the workshop session with internet access. 
@@ -23,14 +23,14 @@ ssh -i tap-workshop.pem $SESSION_NAME@jb-internetrestricted.tanzupartnerdemo.com
 
 ```execute
 tanzu version
-
+enter
 ```
 
 <p style="color:blue"><strong> Click here to check the AWS CLI version</strong></p>
 
 ```execute
 aws --version
-
+enter
 ```
 
 <p style="color:blue"><strong> Click here to check the kubectl version</strong></p>
@@ -123,13 +123,13 @@ imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/full-tbs-dep
 <p style="color:blue"><strong> Copy the downloaded Tanzu Application Platform tar file to internet restricted instance </strong></p>
 
 ```execute-2
-scp -i tap-workshop.pem $HOME/tap-packages-$TAP_VERSION.tar $SESSION_NAME@jb-internetrestricted.tanzupartnerdemo.com:/home/$SESSION_NAME
+scp -i tap-workshop.pem $HOME/tap-packages-$TAP_VERSION.tar $SESSION_NAME@10.0.1.62:/home/$SESSION_NAME
 ```
 
 <p style="color:blue"><strong> Copy the downloaded Tanzu build service tar file to internet restricted instance  </strong></p>
 
 ```execute-2
-scp -i tap-workshop.pem $HOME/tbs-full-deps.tar $SESSION_NAME@jb-internetrestricted.tanzupartnerdemo.com:/home/$SESSION_NAME
+scp -i tap-workshop.pem $HOME/tbs-full-deps.tar $SESSION_NAME@10.0.1.62:/home/$SESSION_NAME
 ```
 
 <p style="color:blue"><strong> Verify the tar files </strong></p>
