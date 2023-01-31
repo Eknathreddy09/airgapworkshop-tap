@@ -31,8 +31,11 @@ kubectl get all -n reposilite
 <p style="color:blue"><strong> Check the load balancer </strong></p>
 
 ```execute
-kubectl get svc -n tanzu-system-ingress
+loadbalancer=$(kubectl get svc envoy -n tanzu-system-ingress -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+echo $loadbalancer
 ```
+
+#### Note: Provide the loadbalancer hostname and {{ session_namespace }} to SE in chat. 
 
 ```execute-2
 cd $HOME/tanzu-java-web-app
