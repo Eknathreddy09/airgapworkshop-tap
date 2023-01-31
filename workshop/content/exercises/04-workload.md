@@ -46,37 +46,37 @@ tanzu package installed list -A
 
 * Open the file to edit the value of mvn wrapper properties 
 ```editor:select-matching-text
-file: /home/tap-airgap-w01-s001/tanzu-java-web-app/.mvn/wrapper/maven-wrapper.properties
+file: /home/eduk8s/tanzu-java-web-app/.mvn/wrapper/maven-wrapper.properties
 text: "reposiliteairgap"
 ```
 
 * Update the value of `distributionUrl` and `wrapperUrl`
 ```editor:replace-text-selection
-file: /home/tap-airgap-w01-s001/tanzu-java-web-app/.mvn/wrapper/maven-wrapper.properties
+file: /home/eduk8s/tanzu-java-web-app/.mvn/wrapper/maven-wrapper.properties
 text: {{ session_namespace }}
 ```
 
 * Open the file to edit the value of mvnw and point to reposilite maven repository
 ```editor:select-matching-text
-file: /home/tap-airgap-w01-s001/tanzu-java-web-app/mvnw
+file: /home/eduk8s/tanzu-java-web-app/mvnw
 text: "reposiliteairgap"
 ```
 
 * Update the value of `jarUrl`
 ```editor:replace-text-selection
-file: /home/tap-airgap-w01-s001/tanzu-java-web-app/mvnw
+file: /home/eduk8s/tanzu-java-web-app/mvnw
 text: {{ session_namespace }}
 ```
 
 * Open the file to edit the value of `DOWNLOAD_URL` env variable
 ```editor:select-matching-text
-file: /home/tap-airgap-w01-s001/tanzu-java-web-app/mvnw.cmd
+file: /home/eduk8s/tanzu-java-web-app/mvnw.cmd
 text: "reposiliteairgap"
 ```
 
 * Update the value of `DOWNLOAD_URL`
 ```editor:replace-text-selection
-file: /home/tap-airgap-w01-s001/tanzu-java-web-app/mvnw.cmd
+file: /home/eduk8s/tanzu-java-web-app/mvnw.cmd
 text: {{ session_namespace }}
 ```
 
