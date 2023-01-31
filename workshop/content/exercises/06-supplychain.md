@@ -16,7 +16,7 @@ TAP also includes Out of the Box Templates and Out of the Box Delivery Basic.
 
 ```editor:open-file
 file: ~/tap-values.yaml
-line: 14
+line: 84
 ```
 
 <p style="color:blue"><strong> List the supply chains </strong></p>
@@ -25,11 +25,7 @@ line: 14
 tanzu apps cluster-supply-chain list
 ```
 
-<p style="color:blue"><strong> Connect to TAP GUI </strong></p>
-
-```dashboard:open-url
-url: http://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/supply-chain/host/tap-install/{{ session_namespace }}
-```
+##### Access TAP GUI from windows JB: https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com
 
 There are two sections within this view:
 
