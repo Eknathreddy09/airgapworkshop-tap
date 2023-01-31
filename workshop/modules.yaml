@@ -28,21 +28,21 @@ modules:
         exit_sign: Accelerators
     exercises/08-accelerators:
         name: Create an accelerator
-        exit_sign: Scan Test
-    exercises/09-Test-scan:
-        name: Scan Test
-        exit_sign: API
-    exercises/10-APIDocs:
-        name: API Docs
-        exit_sign: metadata-store
-    exercises/11-metadatastore:
-        name: Explore Metadata store
-        exit_sign: Tech Docs
-    exercises/12-TechDocs:
-        name: Tech Docs
-        exit_sign: Security Analysis
-    exercises/13-security-analysis:
-        name: Security Analysis
+        exit_sign: Service Binding
+    exercises/09-servicebinding:
+        name: Service Binding with Maria DB
+        exit_sign: GitOps
+    exercises/10-gitopsworkflow:
+        name: GitOps workflow
+        exit_sign: Grype
+    exercises/11-grype:
+        name: Grype
+        exit_sign: External DB
+    exercises/12-externaldb:
+        name: External DB for Metadata store
+        exit_sign: Innerloop
+    exercises/13-Innerloop:
+        name: Inner Leep
         exit_sign: Cleanup
     exercises/14-Cleanup:
         name: Cleanup
