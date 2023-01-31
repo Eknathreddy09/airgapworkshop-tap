@@ -5,29 +5,13 @@ cat $HOME/developer.yaml
 ```
 
 ```execute
-cat $HOME/tekton-pipeline.yaml
-```
-
-```execute
-cat $HOME/scanpolicy.yaml
+cat $HOME/settings-xml.yaml
 ```
 
 <p style="color:blue"><strong> Setup developer namespace </strong></p>
 
 ```execute
 kubectl apply -f $HOME/developer.yaml -n tap-workload
-```
-
-<p style="color:blue"><strong> Deploy Tekton pipeline </strong></p>
-
-```execute
-kubectl apply -f $HOME/tekton-pipeline.yaml -n tap-install
-```
-
-<p style="color:blue"><strong> Deploy Scanpolicy </strong></p>
-
-```execute
-kubectl apply -f $HOME/scanpolicy.yaml -n tap-install
 ```
 
 ```execute
@@ -81,29 +65,29 @@ text: {{ session_namespace }}
 ```
 
 ```execute
-tanzu apps workload create {{ session_namespace }}-app --local-path tanzu-java-web-app/ --type web -n tap-workload --source-image harborairgap.tanzupartnerdemo.com/{{ session_namespace }}/build-service/tanzu-java-web-app-source-new --param-yaml buildServiceBindings='[{"name": "settings-xml", "kind": "Secret"}, {"name": "ca-certificate", "kind": "Secret"}]' --build-env "BP_MAVEN_BUILD_ARGUMENTS=-debug -Dmaven.test.skip=true --no-transfer-progress package"
+tanzu apps workload create {{ session_namespace }}-app --local-path tanzu-java-web-app/ --type web -n tap-workload --source-image harborairgap.tanzupartnerdemo.com/{{ session_namespace }}/build-service/tanzu-java-web-app-source-new --param-yaml buildServiceBindings='[{"name": "settings-xml", "kind": "Secret"}, {"name": "ca-certificate", "kind": "Secret"}]' --build-env "BP_MAVEN_BUILD_ARGUMENTS=-debug -Dmaven.test.skip=true --no-transfer-progress package" -y
 ```
 
 <p style="color:blue"><strong> Get the status of deployed application </strong></p>
 
 ```execute
-sudo tanzu apps workload get {{ session_namespace }}-app -n tap-workload
+tanzu apps workload get {{ session_namespace }}-app -n tap-workload
 ```
 
-*Note:* Ignore below error, it is expected. 
+<p style="color:blue"><strong> Check the live progress of application </strong></p>
 
-![Workload](images/workload-1.png)
+```execute-1
+tanzu apps workload tail {{ session_namespace }}-app --since 10m --timestamp -n tap-workload
+```
 
-<p style="color:blue"><strong> Check the live progress of application</strong></p>
-
-```execute-2
-sudo tanzu apps workload tail {{ session_namespace }}-app --since 10m --timestamp -n tap-workload
+```execute-1
+<ctrl+c>
 ```
 
 <p style="color:blue"><strong> Check all the installed applications </strong></p>
 
 ```execute
-sudo tanzu apps workload list -n tap-workload
+tanzu apps workload list -n tap-workload
 ```
 
 <p style="color:blue"><strong> Get the pods in tap-install namespace </strong></p>
@@ -115,7 +99,7 @@ kubectl get pods -n tap-workload
 ###### Note: Workload creation takes 5 mins to complete, proceed further once you see ready status
 
 ```execute
-sudo tanzu apps workload get {{ session_namespace }}-app -n tap-workload
+tanzu apps workload get {{ session_namespace }}-app -n tap-workload
 ```
 
 ![Workload](images/workload-2.png)
@@ -126,25 +110,17 @@ sudo tanzu apps workload get {{ session_namespace }}-app -n tap-workload
 tanzu apps workload apply {{ session_namespace }}-app --annotation autoscaling.knative.dev/minScale=1 -n tap-workload -y
 ```
 
-```terminal:interrupt
-session: 2
-```
-
 <p style="color:blue"><strong> Collect the load balancer IP </strong></p>
 
 ```execute
-kubectl get svc envoy -n tanzu-system-ingress -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
+lbip=$(nslookup $envoyloadbalancer | awk -F': ' 'NR==6 { print $2 } ')
 ```
 
-###### Add an entry in local host /etc/hosts path pointing the above collected load balancer IP with {{ session_namespace }}.tap-install.{{ session_namespace }}.demo.tanzupartnerdemo.com
+###### IN windows JB, add an entry in host file pointing the $lbip with {{ session_namespace }}-app.tap-workload.tanzupartnerdemo.com
 
 ![Workload](images/tap-workload-4.png)
 
-<p style="color:blue"><strong> Access the deployed application </strong></p>
-
-```dashboard:open-url
-url: http://{{ session_namespace }}-app.tap-workload.tanzupartnerdemo.com
-```
+<p style="color:blue"><strong> Access the deployed application in windows JB - https://{{ session_namespace }}-app.tap-workload.tanzupartnerdemo.com</strong></p>
 
 ![Workload](images/workload-3.png)
 
@@ -156,7 +132,7 @@ url: https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.3/tap/GUID-s
 ```
 
 ```execute
-sudo tanzu apps workload list -n tap-workload
+tanzu apps workload list -n tap-workload
 ```
 
 Note: Image is already created for this workshop and uploaded to Harbor Registry. 
@@ -169,30 +145,23 @@ tanzu apps workload create {{ session_namespace }}-fromimage --image harborairga
 tanzu apps workload tail {{ session_namespace }}-fromimage --namespace tap-workload
 ```
 
+```execute-1
+<ctrl+c>
+```
+
 ```execute
-sudo tanzu apps workload get {{ session_namespace }}-fromimage -n tap-workload
+tanzu apps workload get {{ session_namespace }}-fromimage -n tap-workload
 ```
 
 ![Workload from Image](images/fromimage-1.png)
 
-<p style="color:blue"><strong> Collect the load balancer IP </strong></p>
-
-```execute
-export envoyloadbalancer=$(kubectl get svc envoy -n tanzu-system-ingress -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
-```
-
-```execute
-nslookup $envoyloadbalancer | awk -F': ' 'NR==6 { print $2 } '
-```
 
 ![Workload from Image](images/fromimage-2.png)
 
-###### Add an entry in local host /etc/hosts path pointing the above collected IP with {{ session_namespace }}-fromimage.tap-workload.tanzupartnerdemo.com
+###### IN windows JB, add an entry in host file pointing the $lbip with {{ session_namespace }}-fromimage.tap-workload.tanzupartnerdemo.com
 
 ![Workload from Image](images/fromimage-3.png)
 
 <p style="color:blue"><strong> Access the deployed application </strong></p>
 
-```dashboard:open-url
-url: https://{{ session_namespace }}-fromimage.tap-workload.tanzupartnerdemo.com
-```
+###### Access the deployed application in windows JB - https://{{ session_namespace }}-fromimage.tap-workload.tanzupartnerdemo.com
