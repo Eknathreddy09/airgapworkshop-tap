@@ -117,59 +117,11 @@ mv spring-boot-dependencies-2.5.8.pom org/springframework/boot/spring-boot-depen
 ```
 
 ```execute
-mkdir -p org/springframework/boot/spring-boot-dependencies/2.6.9/
-```
-
-```execute
-mv spring-boot-dependencies-2.6.9.pom org/springframework/boot/spring-boot-dependencies/2.6.9/
-```
-
-```execute
-mkdir -p org/springframework/boot/spring-boot-dependencies/2.7.1/
-```
-
-```execute
-mv spring-boot-dependencies-2.7.1.pom org/springframework/boot/spring-boot-dependencies/2.7.1/
-```
-
-```execute
-mkdir -p org/springframework/boot/spring-boot-dependencies/2.7.3/
-```
-
-```execute
-mv spring-boot-dependencies-2.7.3.pom org/springframework/boot/spring-boot-dependencies/2.7.3/
-```
-
-```execute
 mkdir -p org/springframework/boot/spring-boot-starter-parent/2.5.8/
 ```
 
 ```execute
 mv spring-boot-starter-parent-2.5.8.pom org/springframework/boot/spring-boot-starter-parent/2.5.8/
-```
-
-```execute
-mkdir -p org/springframework/boot/spring-boot-starter-parent/2.6.9/
-```
-
-```execute
-mv spring-boot-starter-parent-2.6.9.pom org/springframework/boot/spring-boot-starter-parent/2.6.9/
-```
-
-```execute
-mkdir -p org/springframework/boot/spring-boot-starter-parent/2.7.1/
-```
-
-```execute
-mv spring-boot-starter-parent-2.7.1.pom org/springframework/boot/spring-boot-starter-parent/2.7.1/
-```
-
-```execute
-mkdir -p org/springframework/boot/spring-boot-starter-parent/2.7.3/
-```
-
-```execute
-mv spring-boot-starter-parent-2.7.3.pom org/springframework/boot/spring-boot-starter-parent/2.7.3/
 ```
 
 ```execute
