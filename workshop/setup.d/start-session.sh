@@ -8,3 +8,4 @@ M2_HOME='/opt/apache-maven-3.6.3'
 PATH="$M2_HOME/bin:$PATH"
 export PATH
 #https://www.digitalocean.com/community/tutorials/install-maven-linux-ubuntu
+bind 'set enable-bracketed-paste off'
