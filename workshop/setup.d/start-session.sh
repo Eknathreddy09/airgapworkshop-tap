@@ -1,4 +1,6 @@
 #!/bin/bash
+set -x
+set +e
 JAVA_HOME='/opt/jdk-13.0.1'
 PATH="$JAVA_HOME/bin:$PATH"
 export PATH
