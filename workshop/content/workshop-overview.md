@@ -3,21 +3,20 @@
 ###### This workshop helps you to get some good understanding on below topics: 
 
 1. Prepare TAP values file
-2. Complete the pre reqs for installing TAP packages
-3. Install TAP with full profile
-4. Setup Authentication for TAP
-5. Create a workload
+2. Complete the pre reqs for installing TAP packages in airgap environment
+3. Install TAP with full profile (OOTB Basic)
+4. Setup Reposilite
+5. Create a workload - locally, git and prebuild image
 6. Explore App Live view, Supply chain and TAP GUI
 7. Create Accelerators
-8. Metadata store (SBOM)
-9. Explore Tech Docs and API Docs
-10. Security Analysis
-11. Vulnerability Scanning
+8. Explore Service Bindings and Grype
+9. Deploy metadata store with external DB
+10. Inner Loop
 
 ###### For more info, refer to VMware official documentation on TAP 1.3: 
 
 ```dashboard:open-url
-url: https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.3/tap/GUID-overview.html
+url: https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/offline-install-intro.html
 ```
 
 ###### Short Video on TAP: 
