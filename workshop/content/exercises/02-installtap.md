@@ -10,6 +10,9 @@ cat $HOME/tap-values.yaml
 tanzu package install tap -p tap.tanzu.vmware.com -v 1.4.0 --values-file $HOME/tap-values.yaml -n tap-install
 ```
 
+![Local host](images/airgap-11.png)
+
+
 Note: This process takes about 5-10 mins to complete. If you see any reconcile errors, please let us know.
 
 <p style="color:blue"><strong> List the packages installed </strong></p>
@@ -17,6 +20,9 @@ Note: This process takes about 5-10 mins to complete. If you see any reconcile e
 ```execute
 tanzu package installed list -A
 ```
+
+![Local host](images/airgap-12.png)
+
 
 <p style="color:red"><strong> Proceeed further only once all the packages are reconciled successfully </strong></p>
 
@@ -26,6 +32,9 @@ tanzu package installed list -A
 ```execute
 tanzu package install full-tbs-deps -p full-tbs-deps.tanzu.vmware.com -v 1.9.0 -n tap-install
 ```
+
+![Local host](images/airgap-13.png)
+
 
 <p style="color:blue"><strong> List the packages installed </strong></p>
 
@@ -38,3 +47,6 @@ tanzu package installed list -A
 ```execute
 kubectl get pods -n build-service
 ```
+
+![Local host](images/airgap-14.png)
+
