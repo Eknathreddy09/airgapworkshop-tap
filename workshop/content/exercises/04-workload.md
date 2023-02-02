@@ -113,7 +113,7 @@ tanzu apps workload apply {{ session_namespace }}-app --annotation autoscaling.k
 <p style="color:blue"><strong> Collect the load balancer IP </strong></p>
 
 ```execute
-lbip=$(nslookup $envoyloadbalancer | awk -F': ' 'NR==6 { print $2 } ')
+lbip=$(nslookup $loadbalancer | awk -F': ' 'NR==6 { print $2 } ')
 ```
 
 ###### IN windows JB, add an entry in host file pointing the $lbip with {{ session_namespace }}-app.tap-workload.tanzupartnerdemo.com
