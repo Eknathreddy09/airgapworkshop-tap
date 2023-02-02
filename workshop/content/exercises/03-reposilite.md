@@ -28,6 +28,9 @@ kubectl apply -f $HOME/reprosilite.yaml -n reposilite
 kubectl get all -n reposilite
 ```
 
+![Local host](images/airgap-15.png)
+
+
 <p style="color:blue"><strong> Check the load balancer </strong></p>
 
 ```execute
@@ -53,31 +56,46 @@ mvn --version
 mvn package
 ```
 
+![Local host](images/airgap-16.png)
+
+
 ###### create private hosted entry in route 53 pointing to the IP
 
 ```execute-2
-scp -i ~/tap-workshop.pem -r /root/.m2/ $SESSION_NAME@jb-internetrestricted.tanzupartnerdemo.com:/home/$SESSION_NAME
+scp -i ~/tap-workshop.pem -r /root/.m2/ $SESSION_NAME@10.0.1.62:/home/$SESSION_NAME
 ```
 
 ```execute-2
-scp -i ~/tap-workshop.pem $HOME/files/*.pom $SESSION_NAME@jb-internetrestricted.tanzupartnerdemo.com:/home/$SESSION_NAME
+scp -i ~/tap-workshop.pem $HOME/files/*.pom $SESSION_NAME@10.0.1.62:/home/$SESSION_NAME
 ```
 
 ```execute-2
-scp -i ~/tap-workshop.pem $HOME/files/*.zip $SESSION_NAME@jb-internetrestricted.tanzupartnerdemo.com:/home/$SESSION_NAME
+scp -i ~/tap-workshop.pem $HOME/files/*.zip $SESSION_NAME@10.0.1.62:/home/$SESSION_NAME
 ```
 
 ```execute-2
-scp -i ~/tap-workshop.pem $HOME/files/*.jar $SESSION_NAME@jb-internetrestricted.tanzupartnerdemo.com:/home/$SESSION_NAME
+scp -i ~/tap-workshop.pem $HOME/files/*.jar $SESSION_NAME@10.0.1.62:/home/$SESSION_NAME
 ```
 
+```execute-1
+ls -ltrh $HOME
+```
+
+![Local host](images/airgap-17.png)
+
+<p style="color:blue"><strong> Collect the Reposilite pod name </strong></p>
+ 
 ```execute
 reposilitepod=$(kubectl get pods -n reposilite -o=jsonpath="{.items[*]['metadata.name', 'status.phase=Running']}")
 ```
 
+<p style="color:blue"><strong> Copy the maven repo into Reposilite pod </strong></p>
+
 ```execute
 kubectl cp .m2/repository/ $reposilitepod:/app/data/repositories/releases -n reposilite
 ```
+
+<p style="color:blue"><strong> Copy the pom, jar and zip files into Reposilite pod </strong></p>
 
 ```execute
 kubectl cp spring-boot-starter-parent-2.5.8.pom $reposilitepod:/app/data/repositories/releases -n reposilite
@@ -146,6 +164,9 @@ mkdir -p org/apache/maven/apache-maven/3.6.3/
 ```execute
 mv apache-maven-3.6.3-bin.zip  org/apache/maven/apache-maven/3.6.3/
 ```
+
+![Local host](images/airgap-18.png)
+
 
 ```execute
 exit
