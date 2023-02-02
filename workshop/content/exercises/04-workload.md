@@ -40,15 +40,39 @@ file: /home/eduk8s/tanzu-java-web-app/.mvn/wrapper/maven-wrapper.properties
 text: {{ session_namespace }}
 ```
 
+* Open the file to edit the value of mvn wrapper properties 
+```editor:select-matching-text
+file: /home/eduk8s/tanzu-java-web-app/.mvn/wrapper/maven-wrapper.properties
+text: "reposiliteairgap"
+```
+
+* Update the value of `distributionUrl` and `wrapperUrl`
+```editor:replace-text-selection
+file: /home/eduk8s/tanzu-java-web-app/.mvn/wrapper/maven-wrapper.properties
+text: {{ session_namespace }}
+```
+
 * Open the file to edit the value of mvnw and point to reposilite maven repository
 ```editor:select-matching-text
 file: /home/eduk8s/tanzu-java-web-app/mvnw
 text: "reposiliteairgap"
 ```
 
-* Update the value of `jarUrl`
+* Update the value of `jarUrl` in mvnw
 ```editor:replace-text-selection
 file: /home/eduk8s/tanzu-java-web-app/mvnw
+text: {{ session_namespace }}
+```
+
+* Open the file to edit the value of `DOWNLOAD_URL` env variable in mvnw.cmd
+```editor:select-matching-text
+file: /home/eduk8s/tanzu-java-web-app/mvnw.cmd
+text: "reposiliteairgap"
+```
+
+* Update the value of `DOWNLOAD_URL` in mvnw.cmd
+```editor:replace-text-selection
+file: /home/eduk8s/tanzu-java-web-app/mvnw.cmd
 text: {{ session_namespace }}
 ```
 
@@ -64,9 +88,18 @@ file: /home/eduk8s/tanzu-java-web-app/mvnw.cmd
 text: {{ session_namespace }}
 ```
 
+```execute-2
+scp -i tap-workshop.pem -r tanzu-java-web-app/ $SESSION_NAME@10.0.1.62:/home/{{ session_namespace }}/ 
+```
+
+##### Deploy a workload ({{ session_namespace }}-app) using local path: 
+
 ```execute
 tanzu apps workload create {{ session_namespace }}-app --local-path tanzu-java-web-app/ --type web -n tap-workload --source-image harborairgap.tanzupartnerdemo.com/{{ session_namespace }}/build-service/tanzu-java-web-app-source-new --param-yaml buildServiceBindings='[{"name": "settings-xml", "kind": "Secret"}, {"name": "ca-certificate", "kind": "Secret"}]' --build-env "BP_MAVEN_BUILD_ARGUMENTS=-debug -Dmaven.test.skip=true --no-transfer-progress package" -y
 ```
+
+![Local host](images/airgap-20.png)
+
 
 <p style="color:blue"><strong> Get the status of deployed application </strong></p>
 
@@ -74,11 +107,15 @@ tanzu apps workload create {{ session_namespace }}-app --local-path tanzu-java-w
 tanzu apps workload get {{ session_namespace }}-app -n tap-workload
 ```
 
+![Local host](images/airgap-19.png)
+
 <p style="color:blue"><strong> Check the live progress of application </strong></p>
 
 ```execute-1
 tanzu apps workload tail {{ session_namespace }}-app --since 10m --timestamp -n tap-workload
 ```
+
+![Local host](images/airgap-81.png)
 
 ```execute-1
 <ctrl+c>
@@ -90,10 +127,10 @@ tanzu apps workload tail {{ session_namespace }}-app --since 10m --timestamp -n 
 tanzu apps workload list -n tap-workload
 ```
 
-<p style="color:blue"><strong> Get the pods in tap-install namespace </strong></p>
+###### Apply Annotation
 
 ```execute
-kubectl get pods -n tap-workload
+tanzu apps workload apply {{ session_namespace }}-app --annotation autoscaling.knative.dev/minScale=1 -n tap-workload -y
 ```
 
 ###### Note: Workload creation takes 5 mins to complete, proceed further once you see ready status
@@ -102,13 +139,16 @@ kubectl get pods -n tap-workload
 tanzu apps workload get {{ session_namespace }}-app -n tap-workload
 ```
 
-![Workload](images/workload-2.png)
+![Workload](images/airgap-82.png)
 
-###### Apply Annotation
+<p style="color:blue"><strong> Get the pods in tap-install namespace </strong></p>
 
 ```execute
-tanzu apps workload apply {{ session_namespace }}-app --annotation autoscaling.knative.dev/minScale=1 -n tap-workload -y
+kubectl get pods -n tap-workload
 ```
+
+![Workload](images/airgap-83.png)
+
 
 <p style="color:blue"><strong> Collect the load balancer IP </strong></p>
 
