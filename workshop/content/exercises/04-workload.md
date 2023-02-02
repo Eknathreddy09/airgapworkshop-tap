@@ -98,7 +98,7 @@ scp -i tap-workshop.pem -r tanzu-java-web-app/ $SESSION_NAME@10.0.1.62:/home/{{ 
 tanzu apps workload create {{ session_namespace }}-app --local-path tanzu-java-web-app/ --type web -n tap-workload --source-image harborairgap.tanzupartnerdemo.com/{{ session_namespace }}/build-service/tanzu-java-web-app-source-new --param-yaml buildServiceBindings='[{"name": "settings-xml", "kind": "Secret"}, {"name": "ca-certificate", "kind": "Secret"}]' --build-env "BP_MAVEN_BUILD_ARGUMENTS=-debug -Dmaven.test.skip=true --no-transfer-progress package" -y
 ```
 
-![Local host](images/airgap-20.png)
+![Local host](images/airgap-19.png)
 
 
 <p style="color:blue"><strong> Get the status of deployed application </strong></p>
@@ -107,7 +107,7 @@ tanzu apps workload create {{ session_namespace }}-app --local-path tanzu-java-w
 tanzu apps workload get {{ session_namespace }}-app -n tap-workload
 ```
 
-![Local host](images/airgap-19.png)
+![Local host](images/airgap-20.png)
 
 <p style="color:blue"><strong> Check the live progress of application </strong></p>
 
