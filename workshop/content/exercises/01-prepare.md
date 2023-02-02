@@ -207,24 +207,10 @@ tanzu secret registry add registry-credentials --server   $IMGPKG_REGISTRY_HOSTN
 tanzu secret registry add registry-credentials --server   $IMGPKG_REGISTRY_HOSTNAME --username $IMGPKG_REGISTRY_USERNAME --password $IMGPKG_REGISTRY_PASSWORD --namespace tap-workload --export-to-all-namespaces --yes
 ```
 
-<p style="color:blue"><strong> Verify the decoded values of harbor registry credentials </strong></p>
-
-```execute
-echo "YWRtaW4tYWlyZ2FwCg==" | base64 -d
-```
-
-```execute
-echo "V2VsY29tZTExIQo=" | base64 -d
-```
-
 <p style="color:blue"><strong> Create secret for gitops </strong></p>
 
 ```execute
-kubectl create secret generic git-secret --from-literal=username="YWRtaW4tYWlyZ2FwCg==" --from-literal=password="V2VsY29tZTExIQo=" -n tap-install
-```
-
-```execute
-kubectl create secret generic git-secret --from-literal=username="YWRtaW4tYWlyZ2FwCg==" --from-literal=password="V2VsY29tZTExIQo=" -n tap-workload
+kubectl create -f $HOME/secret.yaml -n tap-workload
 ```
 
 <p style="color:blue"><strong> Changes to tap values file" </strong></p>
