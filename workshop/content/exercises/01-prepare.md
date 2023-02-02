@@ -23,40 +23,34 @@ ssh -i tap-workshop.pem $SESSION_NAME@10.0.1.62 -o StrictHostKeyChecking=accept-
 
 ```execute
 tanzu version
-enter
 ```
 
 <p style="color:blue"><strong> Click here to check the AWS CLI version</strong></p>
 
 ```execute
 aws --version
-enter
 ```
 
 <p style="color:blue"><strong> Click here to check the kubectl version</strong></p>
 
 ```execute
 kubectl version
-
 ```
 
 ```execute-all
 export SESSION_NAME={{ session_namespace }}
-
 ```
 
 Note: Since we are deploying TAP on TKGm cluster, cluster essentials is not being installed. If you are installing TAP on any other K8s cluster, then follow the steps in https://docs.vmware.com/en/Cluster-Essentials-for-VMware-Tanzu/1.4/cluster-essentials/deploy.html for installing Cluster essentials. 
 
 ```execute
 cp $HOME/config ~/.kube/
-
 ```
 
 <p style="color:blue"><strong> Set the context to workload cluster</strong></p>
 
 ```execute
 kubectl config use-context {{ session_namespace }}-admin@{{ session_namespace }}
-
 ```
 
 <p style="color:blue"><strong> Check if the current context is set to "{{ session_namespace }}"</strong></p>
@@ -108,7 +102,6 @@ docker login registry.tanzu.vmware.com
 ```
 
 <p style="color:blue"><strong> Copy the Tanzu Application Platform images into a .tar file from the VMware Tanzu Network </strong></p>
-
 
 ```execute-2
 imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:$TAP_VERSION --to-tar $HOME/tap-packages-$TAP_VERSION.tar --include-non-distributable-layers
