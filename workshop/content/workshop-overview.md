@@ -13,7 +13,7 @@
 9. Deploy metadata store with external DB
 10. Inner Loop
 
-###### For more info, refer to VMware official documentation on TAP 1.3: 
+###### For more info, refer to VMware official documentation on TAP 1.4: 
 
 ```dashboard:open-url
 url: https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/offline-install-intro.html
