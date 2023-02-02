@@ -169,6 +169,10 @@ cd tanzu-java-web-app && git init && git add . && git commit -m "updated changes
 ```
 
 ```execute
+flux create secret git git-secret -u root -p Newstart1 --ca-file=gitea.crt --url=https://gitlab.tap.tanzupartnerdemo.com/gitlab-instance-081097ef/$SESSION_NAME-repo.git -n tap-workload
+```
+
+```execute
 tanzu apps workload create {{ session_namespace }}-git --git-repo https://gitlab.tap.tanzupartnerdemo.com/gitlab-instance-081097ef/$SESSION_NAME-repo  --git-branch main --type web -n tap-workload --label apps.tanzu.vmware.com/has-tests=true --label app.kubernetes.io/part-of={{ session_namespace }} --param-yaml buildServiceBindings='[{"name": "settings-xml", "kind": "Secret"}, {"name": "ca-certificate", "kind": "Secret"}]' --build-env "BP_MAVEN_BUILD_ARGUMENTS=-debug -Dmaven.test.skip=true --no-transfer-progress package" -y
 ```
 
