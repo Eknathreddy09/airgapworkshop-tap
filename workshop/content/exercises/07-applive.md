@@ -92,7 +92,7 @@ The page includes the following features:
 
 ##### HTTP Exchanges
 
-To navigate to the HTTP Requests page, select the HTTP Requests option from the Information Category drop-down. The HTTP Requests page provides information about HTTP request-response exchanges to the app. The graph visualizes the requests per second indicating the response status of all the requests.
+To navigate to the HTTP Exchanges page, select the HTTP Exchanges option from the Information Category drop-down. The HTTP Exchanges page provides information about HTTP request-response exchanges to the app. The graph visualizes the requests per second indicating the response status of all the requests.
 
 The page includes the following features:
 
@@ -154,7 +154,7 @@ The page includes the following feature:
 
    - Search by the bean name or its corresponding fields.
 
-![Local host](images/live-10.png)
+![Local host](images/Live-10.png)
 
 ##### Metrics Page
 
