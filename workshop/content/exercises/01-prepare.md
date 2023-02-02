@@ -19,6 +19,10 @@ ssh -i tap-workshop.pem $SESSION_NAME@10.0.1.62 -o StrictHostKeyChecking=accept-
 
 ##### Now, you have access to two terminals i.e.,  Terminal-1 is a restricted environment with no access to Internet and terminal-2 is the workshop session with internet access. 
 
+```execute
+bind 'set enable-bracketed-paste off'
+```
+
 <p style="color:blue"><strong> Click here to check the Tanzu version</strong></p>
 
 ```execute
@@ -58,6 +62,8 @@ kubectl config use-context {{ session_namespace }}-admin@{{ session_namespace }}
 ```execute
 kubectl config get-contexts
 ```
+
+![Local host](images/airgap-1.png)
 
 <p style="color:blue"><strong> Set up environment variables for installation </strong></p>
 
@@ -107,11 +113,15 @@ docker login registry.tanzu.vmware.com
 imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:$TAP_VERSION --to-tar $HOME/tap-packages-$TAP_VERSION.tar --include-non-distributable-layers
 ```
 
+![Local host](images/airgap-3.png)
+
 <p style="color:blue"><strong> Copy the Tanzu build service images into a .tar file from the VMware Tanzu Network</strong></p>
 
 ```execute-2
 imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/full-tbs-deps-package-repo:1.9.0 --to-tar=$HOME/tbs-full-deps.tar
 ```
+
+![Local host](images/airgap-4.png)
 
 <p style="color:blue"><strong> Copy the downloaded Tanzu Application Platform tar file to internet restricted instance </strong></p>
 
@@ -167,11 +177,16 @@ tanzu secret registry add tap-registry --server   $IMGPKG_REGISTRY_HOSTNAME --us
 tanzu secret registry add tap-registry --server   $IMGPKG_REGISTRY_HOSTNAME --username $IMGPKG_REGISTRY_USERNAME --password $IMGPKG_REGISTRY_PASSWORD --namespace tap-workload --export-to-all-namespaces --yes
 ```
 
+![Local host](images/airgap-2.png)
+
 <p style="color:blue"><strong> Add the package repository </strong></p>
 
 ```execute
 tanzu package repository add tanzu-tap-repository --url $IMGPKG_REGISTRY_HOSTNAME/$SESSION_NAME/tap-packages:$TAP_VERSION --namespace tap-install
 ```
+
+![Local host](images/airgap-5.png)
+
 
 <p style="color:blue"><strong> Add the tanzu build service package repository </strong></p>
 
@@ -179,11 +194,15 @@ tanzu package repository add tanzu-tap-repository --url $IMGPKG_REGISTRY_HOSTNAM
 tanzu package repository add tbs-full-deps-repository --url $IMGPKG_REGISTRY_HOSTNAME/$SESSION_NAME/tbs-full-deps:1.9.0 --namespace tap-install
 ```
 
+![Local host](images/airgap-6.png)
+
 <p style="color:blue"><strong> Get the status of the TAP package repository, and ensure the status updates to Reconcile succeeded </strong></p>
 
 ```execute
 tanzu package repository get tanzu-tap-repository --namespace tap-install
 ```
+
+![Local host](images/airgap-7.png)
 
 <p style="color:blue"><strong>  List the available packages </strong></p>
 
@@ -196,6 +215,9 @@ tanzu package available list --namespace tap-install
 ```execute
 tanzu package available list tap.tanzu.vmware.com --namespace tap-install
 ```
+
+![Local host](images/airgap-8.png)
+
 
 <p style="color:blue"><strong> Create a registry secret: registry-credentials </strong></p>
 
