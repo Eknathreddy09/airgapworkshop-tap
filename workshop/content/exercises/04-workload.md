@@ -124,11 +124,28 @@ lbip=$(nslookup $envoyloadbalancer | awk -F': ' 'NR==6 { print $2 } ')
 
 ![Workload](images/workload-3.png)
 
+### Workload pointing to Git Repository
+
+```execute
+tanzu apps workload create {{ session_namespace }}-git --git-repo https://gitlab.tap.tanzupartnerdemo.com/gitlab-instance-081097ef/tanzu-java-web-app  --git-branch main --type web -n tap-workload --label apps.tanzu.vmware.com/has-tests=true --label app.kubernetes.io/part-of=tanzu-java-web-app --param-yaml buildServiceBindings='[{"name": "settings-xml", "kind": "Secret"}, {"name": "ca-certificate", "kind": "Secret"}]' --build-env "BP_MAVEN_BUILD_ARGUMENTS=-debug -Dmaven.test.skip=true --no-transfer-progress package" -y
+```
+
+```execute
+tanzu apps workload list -n tap-workload
+```
+
+```execute
+tanzu apps workload tail {{ session_namespace }}-git --namespace tap-workload
+```
+
+```execute
+tanzu apps workload get {{ session_namespace }}-git -n tap-workload
+```
 
 ### Pre-build image: 
 
 ```dashboard:open-url
-url: https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.3/tap/GUID-scc-pre-built-image.html
+url: https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/scc-pre-built-image.html
 ```
 
 ```execute
