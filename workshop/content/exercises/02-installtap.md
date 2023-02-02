@@ -1,3 +1,16 @@
+
+```execute-2
+sed -i -r "s/SESSION_NAME/$SESSION_NAME/g" /home/eduk8s/tanzu-java-web-app/config/workload.yaml && sed -i -r "s/SESSION_NAME/$SESSION_NAME/g" /home/eduk8s/tanzu-java-web-app/catalog/catalog-info.yaml
+```
+
+```execute-2
+scp -i tap-workshop.pem -r $HOME/tanzu-java-web-app/ $SESSION_NAME@10.0.1.62:/home/{{ session_namespace }}/ 
+```
+
+```execute
+cd tanzu-java-web-app && git init && git add . && git commit -m "updated changes" && git remote add origin https://gitlab.tap.tanzupartnerdemo.com/gitlab-instance-081097ef/$SESSION_NAME-repo.git && git push https://root:Newstart1@gitlab.tap.tanzupartnerdemo.com/gitlab-instance-081097ef/$SESSION_NAME-repo HEAD:main --force
+```
+
 <p style="color:blue"><strong> Review Tap values file </strong></p>
 
 ```execute
