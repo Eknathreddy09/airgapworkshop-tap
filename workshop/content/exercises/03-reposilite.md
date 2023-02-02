@@ -100,6 +100,10 @@ kubectl exec -it $reposilitepod -n reposilite -- bash
 ```
 
 ```execute
+bind 'set enable-bracketed-paste off'
+```
+
+```execute
 cd data/repositories/releases
 ```
 
