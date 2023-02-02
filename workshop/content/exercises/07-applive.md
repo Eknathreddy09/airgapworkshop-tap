@@ -2,19 +2,19 @@ The Application Live View features of the Tanzu Application Platform include sop
 
 Application Live View shows an individual running process
 
-<p style="color:blue"><strong> Connect to TAP GUI </strong></p>
+<p style="color:blue"><strong> Connect to TAP GUI from windows JB </strong></p>
 
 ```dashboard:open-url
-url: http://tap-gui.{{ session_namespace }}.demo.tanzupartnerdemo.com/catalog/default/component/partnertapdemo/workloads
+url: https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/catalog/default/component/tanzu-java-web-app/workloads
 ```
 
 ###### In Tap GUI, Click on deployment resource as shown below: 
 
-![Local host](images/liveview-21.png)
+![Local host](images/airgap-31.png)
 
 ###### Scroll down for app live view section: 
 
-![Local host](images/liveview-22.png)
+![Local host](images/airgap-32.png)
 
 ##### Health page
 
@@ -90,7 +90,7 @@ The page includes the following features:
 
 ![Local host](images/Live-6.png)
 
-##### HTTP Requests page
+##### HTTP Exchanges
 
 To navigate to the HTTP Requests page, select the HTTP Requests option from the Information Category drop-down. The HTTP Requests page provides information about HTTP request-response exchanges to the app. The graph visualizes the requests per second indicating the response status of all the requests.
 
@@ -115,6 +115,26 @@ The page includes the following feature:
 
 ![Local host](images/Live-8.png)
 
+##### Caches 
+
+To navigate to the Caches page, the user can select the Caches option from the Information Category drop-down menu.
+
+The Caches page provides access to the application’s caches. It gives the details of the cache managers associated with the application including the fully qualified name of the native cache.
+
+The search feature in the Caches Page enables the user to search for a specific cache/cache manager. The user can clear individual caches by clicking Evict. The user can clear all the caches completely by clicking Evict All. If there are no cache managers for the application, the message No cache managers available for the application is displayed.
+
+![Local host](images/Live-13.png)
+
+##### ScheduledTasks
+
+To navigate to the Scheduled Tasks page, the user can select the Scheduled Tasks option from the Information Category drop-down menu.
+
+The scheduled tasks page provides information about the application’s scheduled tasks. It includes cron tasks, fixed delay tasks and fixed rate tasks, custom tasks and the properties associated with them.
+
+The user can search for a particular property or a task in the search bar to retrieve the task or property details. For this workload there are no scheduled task created.
+
+![Local host](images/Live-14.png)
+
 ##### Conditions page
 
 To navigate to the Conditions page, select the Conditions option from tthe Information Category drop-down. The conditions evaluation report provides information about the evaluation of conditions on configuration and auto-configuration classes. For Spring Boot, this gives the user a clear view of all the beans configured in the app.
@@ -134,7 +154,7 @@ The page includes the following feature:
 
    - Search by the bean name or its corresponding fields.
 
-![Local host](images/liveview-23.png)
+![Local host](images/live-10.png)
 
 ##### Metrics Page
 
