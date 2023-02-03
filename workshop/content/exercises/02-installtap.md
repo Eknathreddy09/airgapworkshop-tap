@@ -8,7 +8,7 @@ scp -i tap-workshop.pem -r $HOME/tanzu-java-web-app/ $SESSION_NAME@10.0.1.62:/ho
 ```
 
 ```execute
-cd tanzu-java-web-app && git init && git add . && git commit -m "updated changes" && git remote add origin https://gitlab.tap.tanzupartnerdemo.com/gitlab-instance-081097ef/$SESSION_NAME-repo.git && git push https://root:Newstart1@gitlab.tap.tanzupartnerdemo.com/gitlab-instance-081097ef/$SESSION_NAME-repo HEAD:main --force
+cd tanzu-java-web-app && git init && git add . && git commit -m "updated changes" && git remote remove origin && git remote add origin https://gitlab.tap.tanzupartnerdemo.com/gitlab-instance-081097ef/$SESSION_NAME-repo.git && git push https://root:Newstart1@gitlab.tap.tanzupartnerdemo.com/gitlab-instance-081097ef/$SESSION_NAME-repo HEAD:main --force
 ```
 
 <p style="color:blue"><strong> Review Tap values file </strong></p>
