@@ -22,6 +22,10 @@ tanzu accelerator list
 kubectl get pods -n accelerator-system
 ```
 
+Access the url in windows JB to check the accelerator file that will be used in next steps: 
+
+##### https://gitlab.tap.tanzupartnerdemo.com/gitlab-instance-081097ef/partnertapdemo-app/-/blob/main/accelerator.yaml
+
 ##### Check the Accelerator section for details: 
 
 ```execute
