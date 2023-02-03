@@ -88,6 +88,10 @@ file: /home/eduk8s/tanzu-java-web-app/mvnw.cmd
 text: {{ session_namespace }}
 ```
 
+```execute-2
+scp -i $HOME/tap-workshop.pem -r $HOME/tanzu-java-web-app/ {{ session_namespace }}@10.0.1.62:/home/{{ session_namespace }}/
+```
+
 ##### Deploy a workload ({{ session_namespace }}-app) using local path: 
 
 ```execute
