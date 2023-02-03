@@ -253,15 +253,14 @@ tanzu apps workload tail {{ session_namespace }}-fromimage --namespace tap-workl
 tanzu apps workload get {{ session_namespace }}-fromimage -n tap-workload
 ```
 
-![Workload from Image](images/fromimage-1.png)
+![Workload from Image](images/airgap-97.png)
 
+###### IN windows JB, add an entry in hosts file (Path - C:\Windows\System32\drivers\etc) pointing the $lbip with  {{ session_namespace }}-fromimage.tap-workload.tanzupartnerdemo.com
 
-![Workload from Image](images/fromimage-2.png)
-
-###### IN windows JB, add an entry in host file pointing the $lbip with {{ session_namespace }}-fromimage.tap-workload.tanzupartnerdemo.com
-
-![Workload from Image](images/fromimage-3.png)
+![DNS entry](images/airgap-98.png)
 
 <p style="color:blue"><strong> Access the deployed application </strong></p>
 
 ###### Access the deployed application in windows JB - https://{{ session_namespace }}-fromimage.tap-workload.tanzupartnerdemo.com
+
+![Application Access](images/airgap-99.png)
