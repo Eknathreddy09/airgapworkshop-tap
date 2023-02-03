@@ -127,11 +127,15 @@ tanzu apps workload tail {{ session_namespace }}-app --since 10m --timestamp -n 
 tanzu apps workload list -n tap-workload
 ```
 
+![Local host](images/airgap-89.png)
+
 ###### Apply Annotation
 
 ```execute
 tanzu apps workload apply {{ session_namespace }}-app --annotation autoscaling.knative.dev/minScale=1 -n tap-workload -y
 ```
+
+![Local host](images/airgap-90.png)
 
 ###### Note: Workload creation takes 5 mins to complete, proceed further once you see ready status
 
@@ -156,13 +160,17 @@ kubectl get pods -n tap-workload
 lbip=$(nslookup $loadbalancer | awk -F': ' 'NR==6 { print $2 } ')
 ```
 
-###### IN windows JB, add an entry in host file pointing the $lbip with {{ session_namespace }}-app.tap-workload.tanzupartnerdemo.com
+```execute
+echo $lbip
+```
 
-![Workload](images/tap-workload-4.png)
+###### IN windows JB, add an entry in hosts file (Path - C:\Windows\System32\drivers\etc) pointing the $lbip with {{ session_namespace }}-app.tap-workload.tanzupartnerdemo.com
+
+![Workload](images/airgap-91.png)
 
 <p style="color:blue"><strong> Access the deployed application in windows JB - https://{{ session_namespace }}-app.tap-workload.tanzupartnerdemo.com</strong></p>
 
-![Workload](images/workload-3.png)
+![Workload](images/airgap-92.png)
 
 ### Workload pointing to Git Repository
 
@@ -172,9 +180,13 @@ lbip=$(nslookup $loadbalancer | awk -F': ' 'NR==6 { print $2 } ')
 cd tanzu-java-web-app && git init && git add . && git commit -m "updated changes" && git remote remove origin && git remote add origin https://gitlab.tap.tanzupartnerdemo.com/gitlab-instance-081097ef/$SESSION_NAME-repo.git && git push https://root:Newstart1@gitlab.tap.tanzupartnerdemo.com/gitlab-instance-081097ef/$SESSION_NAME-repo HEAD:main --force
 ```
 
+##### Create a secret using Flux cli
+
 ```execute
-flux create secret git git-secret -u root -p Newstart1 --ca-file=gitea.crt --url=https://gitlab.tap.tanzupartnerdemo.com/gitlab-instance-081097ef/$SESSION_NAME-repo.git -n tap-workload
+cd .. && flux create secret git git-secret -u root -p Newstart1 --ca-file=gitea.crt --url=https://gitlab.tap.tanzupartnerdemo.com/gitlab-instance-081097ef/$SESSION_NAME-repo.git -n tap-workload
 ```
+
+##### Deploy a workload ({{ session_namespace }}-git) by pointing to Gitlab project: 
 
 ```execute
 tanzu apps workload create {{ session_namespace }}-git --git-repo https://gitlab.tap.tanzupartnerdemo.com/gitlab-instance-081097ef/$SESSION_NAME-repo  --git-branch main --type web -n tap-workload --label apps.tanzu.vmware.com/has-tests=true --label app.kubernetes.io/part-of={{ session_namespace }} --param-yaml buildServiceBindings='[{"name": "settings-xml", "kind": "Secret"}, {"name": "ca-certificate", "kind": "Secret"}]' --build-env "BP_MAVEN_BUILD_ARGUMENTS=-debug -Dmaven.test.skip=true --no-transfer-progress package" -y
@@ -188,9 +200,30 @@ tanzu apps workload list -n tap-workload
 tanzu apps workload tail {{ session_namespace }}-git --namespace tap-workload
 ```
 
+![Workload](images/airgap-94.png)
+
+```execute-1
+<ctrl+c>
+```
+
 ```execute
 tanzu apps workload get {{ session_namespace }}-git -n tap-workload
 ```
+
+![Workload](images/airgap-93.png)
+
+```execute
+echo $lbip
+```
+
+###### IN windows JB, add an entry in hosts file (Path - C:\Windows\System32\drivers\etc) pointing the $lbip with {{ session_namespace }}-git.tap-workload.tanzupartnerdemo.com
+
+![Workload](images/airgap-95.png)
+
+<p style="color:blue"><strong> Access the deployed application in windows JB - https://{{ session_namespace }}-git.tap-workload.tanzupartnerdemo.com</strong></p>
+
+![Workload](images/airgap-96.png)
+
 
 ### Pre-build image: 
 
