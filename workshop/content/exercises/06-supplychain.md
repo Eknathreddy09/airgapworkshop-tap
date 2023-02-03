@@ -12,7 +12,7 @@ Out of the box supply chains are provided with Tanzu Application Platform and th
       
 TAP also includes Out of the Box Templates and Out of the Box Delivery Basic. 
 
-##### For this workshop, we have deployed TAP using OOTB supply chain with testing and scanning. 
+##### For this workshop, we have deployed TAP using OOTB supply chain with basic. 
 
 ```editor:open-file
 file: ~/tap-values.yaml
@@ -25,7 +25,7 @@ line: 84
 tanzu apps cluster-supply-chain list
 ```
 
-##### Access TAP GUI from windows JB: https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com
+##### Access TAP GUI from windows JB: https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com , Navigate to Supply Chains and click on {{ session_namespace }}-git
 
 There are two sections within this view:
 
@@ -33,7 +33,9 @@ Graph view at the top, which shows all the configured CRDs used by this supply c
 
 Stage details view at the bottom, which shows source data for each part of the supply chain that you select in the graph view
 
-###### click on various stages in supply chain to understand better
+###### click on various stages in supply chain to understand better. 
+
+Below are the detailed stages an application go through with OOTB test and scan, pleas read through. 
 
 ![Local host](images/sc-1.png)
 
@@ -92,5 +94,5 @@ The **Delivery** step of the supply chain apply the yaml file on a cluster. This
 For more detailed info reg supply chains, please refer to official vmware doc: 
 
 ```dashboard:open-url
-url: https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.3/tap/GUID-scc-ootb-supply-chain-testing-scanning.html
+url: https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/scc-ootb-supply-chain-testing-scanning.html
 ```
