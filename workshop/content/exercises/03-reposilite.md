@@ -63,7 +63,11 @@ mvn package
 ![Local host](images/airgap-16.png)
 
 
-###### create private hosted entry in route 53 pointing to the IP
+###### Once the DNS record is created for Reposilite, then connect to windows JB and access the reposilite url: https://{{ session_namespace }} .tap.tanzupartnerdemo.com using Chrome Browser (incongnito preferred)
+
+![Local host](images/airgap-87.png)
+
+<p style="color:blue"><strong> Now, lets copy the files into Reposilite pod using below commands:   </strong></p>
 
 ```execute-2
 scp -i ~/tap-workshop.pem -r /root/.m2/ $SESSION_NAME@10.0.1.62:/home/$SESSION_NAME
@@ -91,6 +95,10 @@ ls -ltrh $HOME
  
 ```execute
 reposilitepod=$(kubectl get pods -n reposilite -o=jsonpath="{.items[*]['metadata.name', 'status.phase=Running']}")
+```
+
+```execute
+echo $reposilitepod
 ```
 
 <p style="color:blue"><strong> Copy the maven repo into Reposilite pod </strong></p>
@@ -169,11 +177,10 @@ mkdir -p org/apache/maven/apache-maven/3.6.3/
 mv apache-maven-3.6.3-bin.zip  org/apache/maven/apache-maven/3.6.3/
 ```
 
-![Local host](images/airgap-18.png)
+##### In windows JB, open google chrome and access the url https://{{ session_namespace }}.tap.tanzupartnerdemo.com/#/releases and verify the copied files under releases as shown below: 
 
+![Local host](images/airgap-88.png)
 
 ```execute
 exit
 ```
-
-In windows JB, open google chrome and access the url https://{{ session_namespace }}.tap.tanzupartnerdemo.com/ and verify the copied files under releases as shown below: 
