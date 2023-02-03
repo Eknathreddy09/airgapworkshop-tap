@@ -22,7 +22,7 @@ kubectl create secret tls  my-tls-secret --cert=$HOME/fullchain.pem  --key=$HOME
 kubectl apply -f $HOME/reprosilite.yaml -n reposilite
 ```
 
-<p style="color:blue"><strong> Check the pods in namespace reposilite </strong></p>
+<p style="color:blue"><strong> Check the pods in namespace reposilite, proceed further once the pods are in running state</strong></p>
 
 ```execute
 kubectl get all -n reposilite
@@ -42,6 +42,10 @@ echo $loadbalancer
 
 ```execute-2
 cd $HOME/tanzu-java-web-app
+```
+
+```execute-2
+JAVA_HOME='/opt/jdk-13.0.1' && PATH="$JAVA_HOME/bin:$PATH" && export PATH && M2_HOME='/opt/apache-maven-3.6.3' && PATH="$M2_HOME/bin:$PATH" && export PATH
 ```
 
 <p style="color:blue"><strong> Verify the maven version </strong></p>
