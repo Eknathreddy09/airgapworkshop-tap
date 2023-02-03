@@ -109,6 +109,8 @@ docker login registry.tanzu.vmware.com
 
 <p style="color:blue"><strong> Copy the Tanzu Application Platform images into a .tar file from the VMware Tanzu Network </strong></p>
 
+###### Note: Please wait till you see Succeeded message in Terminal-2, should take around 3-5 mins to complete. 
+
 ```execute-2
 imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:$TAP_VERSION --to-tar $HOME/tap-packages-$TAP_VERSION.tar --include-non-distributable-layers
 ```
@@ -116,6 +118,8 @@ imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages
 ![Local host](images/airgap-3.png)
 
 <p style="color:blue"><strong> Copy the Tanzu build service images into a .tar file from the VMware Tanzu Network</strong></p>
+
+###### Note: Please wait till you see Succeeded message in Terminal-2, should take around 3-5 mins to complete. 
 
 ```execute-2
 imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/full-tbs-deps-package-repo:1.9.0 --to-tar=$HOME/tbs-full-deps.tar
@@ -151,11 +155,16 @@ ls -ltrh | grep "tbs-full-deps.tar"
 imgpkg copy --tar $HOME/tap-packages-$TAP_VERSION.tar --to-repo $IMGPKG_REGISTRY_HOSTNAME/$SESSION_NAME/tap-packages --include-non-distributable-layers --registry-ca-cert-path $REGISTRY_CA_PATH
 ```
 
+![Local host](images/airgap-85.png)
+
 <p style="color:blue"><strong> Relocate the Tanzu build service images with the Carvel tool imgpkg into harbor registry </strong></p>
 
 ```execute-1
 imgpkg copy --tar $HOME/tbs-full-deps.tar --to-repo=$IMGPKG_REGISTRY_HOSTNAME/$SESSION_NAME/tbs-full-deps --registry-ca-cert-path $REGISTRY_CA_PATH
 ```
+
+![Local host](images/airgap-86.png)
+
 
 <p style="color:blue"><strong> Create a namespace </strong></p>
 
