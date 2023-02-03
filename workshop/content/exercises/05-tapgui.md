@@ -29,16 +29,31 @@ kubectl get pods -n tap-gui
 kubectl create secret tls tap-gui-secret --key="privkey.pem" --cert="fullchain.pem" -n tap-gui
 ```
 
-Remove # from lines from 103-105
+###### Remove # from lines ( 103-105 ) of tap-values.yaml, located in home directory 
+
+```execute
+vi $HOME/tap-values.yaml
+```
+
+![TAP GUI](images/tapgui-20.png)
+
+![TAP GUI](images/tapgui-21.png)
+
 
 ```execute
 tanzu package installed update tap -f tap-values.yaml -n tap-install
 ```
 
-##### IN windows JB, add an entry in host file pointing the $lbip with tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com
+```execute
+echo $lbip
+```
+
+###### IN windows JB, add an entry in hosts file (Path - C:\Windows\System32\drivers\etc) pointing the $lbip with tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com
 
 Example for ref: 
 
-![TAP GUI](images/gui-1.png)
+![TAP GUI](images/tapgui-22.png)
 
 <p style="color:blue"><strong> Access TAP GUI from windows JB: https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com </strong></p>
+
+![TAP GUI](images/tapgui-23.png)
