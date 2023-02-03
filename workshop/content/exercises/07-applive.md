@@ -1,12 +1,16 @@
 The Application Live View features of the Tanzu Application Platform include sophisticated components to give developers and operators a view into their running workloads on Kubernetes.
 
-Application Live View shows an individual running process
-
-<p style="color:blue"><strong> Connect to TAP GUI from windows JB </strong></p>
-
-```dashboard:open-url
-url: https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/catalog/default/component/tanzu-java-web-app/workloads
+```execute-1
+echo $lbip
 ```
+
+Application Live View shows an individual running process: Before proceeding further, ensure to check if the appliveview is resolving the IP address
+
+```execute-1
+nslookup appliveview.{{ session_namespace }}.tap.tanzupartnerdemo.com	
+```
+
+<p style="color:blue"><strong> Connect to TAP GUI from windows JB by accessing the url: https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/catalog/default/component/{{ session_namespace }}/workloads </strong></p>
 
 ###### In Tap GUI, Click on deployment resource as shown below: 
 
