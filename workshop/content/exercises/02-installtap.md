@@ -14,7 +14,7 @@ cd tanzu-java-web-app && git init && git add . && git commit -m "updated changes
 <p style="color:blue"><strong> Review Tap values file </strong></p>
 
 ```execute
-cat $HOME/tap-values.yaml
+cd .. && cat $HOME/tap-values.yaml
 ```
 
 <p style="color:blue"><strong> Install Tanzu package with full profile</strong></p>
