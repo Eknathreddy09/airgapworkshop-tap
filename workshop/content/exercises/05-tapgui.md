@@ -44,16 +44,6 @@ vi $HOME/tap-values.yaml
 tanzu package installed update tap -f tap-values.yaml -n tap-install
 ```
 
-```execute
-echo $lbip
-```
-
-###### IN windows JB, add an entry in hosts file (Path - C:\Windows\System32\drivers\etc) pointing the $lbip with tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com
-
-Example for ref: 
-
-![TAP GUI](images/tapgui-22.png)
-
-<p style="color:blue"><strong> Access TAP GUI from windows JB: https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com </strong></p>
+<p style="color:blue"><strong> Access TAP-GUI url in App Stream browser: https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com </strong></p>
 
 ![TAP GUI](images/tapgui-23.png)
