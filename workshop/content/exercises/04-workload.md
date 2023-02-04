@@ -95,7 +95,7 @@ scp -i $HOME/tap-workshop.pem -r $HOME/tanzu-java-web-app/ {{ session_namespace 
 ##### Deploy a workload ({{ session_namespace }}-app) using local path: 
 
 ```execute
-tanzu apps workload create {{ session_namespace }}-app --local-path tanzu-java-web-app/ --type web -n tap-workload --source-image harborairgap.tanzupartnerdemo.com/{{ session_namespace }}/build-service/{{ session_namespace }}-source-new --param-yaml buildServiceBindings='[{"name": "settings-xml", "kind": "Secret"}, {"name": "ca-certificate", "kind": "Secret"}]' --build-env "BP_MAVEN_BUILD_ARGUMENTS=-debug -Dmaven.test.skip=true --no-transfer-progress package" -y
+tanzu apps workload create app --local-path tanzu-java-web-app/ --type web -n tap-workload --source-image harborairgap.tanzupartnerdemo.com/{{ session_namespace }}/build-service/{{ session_namespace }}-source-new --param-yaml buildServiceBindings='[{"name": "settings-xml", "kind": "Secret"}, {"name": "ca-certificate", "kind": "Secret"}]' --build-env "BP_MAVEN_BUILD_ARGUMENTS=-debug -Dmaven.test.skip=true --no-transfer-progress package" -y
 ```
 
 ![Local host](images/airgap-19.png)
@@ -153,22 +153,7 @@ kubectl get pods -n tap-workload
 
 ![Workload](images/airgap-83.png)
 
-
-<p style="color:blue"><strong> Collect the load balancer IP </strong></p>
-
-```execute
-lbip=$(nslookup $loadbalancer | awk -F': ' 'NR==6 { print $2 } ')
-```
-
-```execute
-echo $lbip
-```
-
-###### IN windows JB, add an entry in hosts file (Path - C:\Windows\System32\drivers\etc) pointing the $lbip with {{ session_namespace }}-app.tap-workload.tanzupartnerdemo.com
-
-![Workload](images/airgap-91.png)
-
-<p style="color:blue"><strong> Access the deployed application in windows JB - https://{{ session_namespace }}-app.tap-workload.tanzupartnerdemo.com</strong></p>
+<p style="color:blue"><strong> Access the deployed application in App Stream browser- https://app.tap-workload.{{ session_namespace }}.tap.tanzupartnerdemo.com</strong></p>
 
 ![Workload](images/airgap-92.png)
 
@@ -189,7 +174,7 @@ cd .. && flux create secret git git-secret -u root -p Newstart1 --ca-file=gitea.
 ##### Deploy a workload ({{ session_namespace }}-git) by pointing to Gitlab project: 
 
 ```execute
-tanzu apps workload create {{ session_namespace }}-git --git-repo https://gitlab.tap.tanzupartnerdemo.com/gitlab-instance-081097ef/$SESSION_NAME-repo  --git-branch main --type web -n tap-workload --label apps.tanzu.vmware.com/has-tests=true --label app.kubernetes.io/part-of={{ session_namespace }} --param-yaml buildServiceBindings='[{"name": "settings-xml", "kind": "Secret"}, {"name": "ca-certificate", "kind": "Secret"}]' --build-env "BP_MAVEN_BUILD_ARGUMENTS=-debug -Dmaven.test.skip=true --no-transfer-progress package" -y
+tanzu apps workload create gitapp --git-repo https://gitlab.tap.tanzupartnerdemo.com/gitlab-instance-081097ef/$SESSION_NAME-repo  --git-branch main --type web -n tap-workload --label apps.tanzu.vmware.com/has-tests=true --label app.kubernetes.io/part-of={{ session_namespace }} --param-yaml buildServiceBindings='[{"name": "settings-xml", "kind": "Secret"}, {"name": "ca-certificate", "kind": "Secret"}]' --build-env "BP_MAVEN_BUILD_ARGUMENTS=-debug -Dmaven.test.skip=true --no-transfer-progress package" -y
 ```
 
 ```execute
@@ -212,18 +197,9 @@ tanzu apps workload get {{ session_namespace }}-git -n tap-workload
 
 ![Workload](images/airgap-93.png)
 
-```execute
-echo $lbip
-```
-
-###### IN windows JB, add an entry in hosts file (Path - C:\Windows\System32\drivers\etc) pointing the $lbip with {{ session_namespace }}-git.tap-workload.tanzupartnerdemo.com
-
-![Workload](images/airgap-95.png)
-
-<p style="color:blue"><strong> Access the deployed application in windows JB - https://{{ session_namespace }}-git.tap-workload.tanzupartnerdemo.com</strong></p>
+<p style="color:blue"><strong> Access the deployed application in App Stream browser- https://gitapp.tap-workload.{{ session_namespace }}.tap.tanzupartnerdemo.com</strong></p>
 
 ![Workload](images/airgap-96.png)
-
 
 ### Pre-build image: 
 
@@ -238,7 +214,7 @@ tanzu apps workload list -n tap-workload
 Note: Image is already created for this workshop and uploaded to Harbor Registry. 
 
 ```execute
-tanzu apps workload create {{ session_namespace }}-fromimage --image harborairgap.tanzupartnerdemo.com/tapairgap/prebuildimage:latest --type web --app {{ session_namespace }}-fromimage -n tap-workload -y
+tanzu apps workload create fromimage --image harborairgap.tanzupartnerdemo.com/tapairgap/prebuildimage:latest --type web --app {{ session_namespace }}-fromimage -n tap-workload -y
 ```
 
 ```execute-1
@@ -255,12 +231,7 @@ tanzu apps workload get {{ session_namespace }}-fromimage -n tap-workload
 
 ![Workload from Image](images/airgap-97.png)
 
-###### IN windows JB, add an entry in hosts file (Path - C:\Windows\System32\drivers\etc) pointing the $lbip with  {{ session_namespace }}-fromimage.tap-workload.tanzupartnerdemo.com
 
-![DNS entry](images/airgap-98.png)
-
-<p style="color:blue"><strong> Access the deployed application </strong></p>
-
-###### Access the deployed application in windows JB - https://{{ session_namespace }}-fromimage.tap-workload.tanzupartnerdemo.com
+<p style="color:blue"><strong> Access the deployed application in App Stream browser- https://fromimage.tap-workload.{{ session_namespace }}.tap.tanzupartnerdemo.com </strong></p>
 
 ![Application Access](images/airgap-99.png)
