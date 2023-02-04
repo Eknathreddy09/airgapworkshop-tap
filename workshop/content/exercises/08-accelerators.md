@@ -2,7 +2,7 @@ Tanzu Application Platform provides an easy way to browse and consume templates 
 * Enterprise Architects use Application Accelerator to provide developers and operators in their organization with enterprise-compliant templates for code and configurations.
 * Developers use Application Accelerator to create or access projects which follow enterprise standards.
 
-We're going to check out **Application Accelerator** by accessing the below url in windows JB. 
+We're going to check out **Application Accelerator** by accessing the below url in App Stream browser. 
 
 
 ###### https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/create
@@ -22,7 +22,7 @@ tanzu accelerator list
 kubectl get pods -n accelerator-system
 ```
 
-Access the url in windows JB to check the accelerator file that will be used in next steps: 
+Access the url in App Stream browser to check the accelerator file that will be used in next steps: 
 
 ##### https://gitlab.tap.tanzupartnerdemo.com/gitlab-instance-081097ef/partnertapdemo-app/-/blob/main/accelerator.yaml
 
@@ -32,7 +32,7 @@ Access the url in windows JB to check the accelerator file that will be used in 
 cat $HOME/tap-values.yaml
 ```
 
-###### In windows JB, Access the Gitlab project: and go through the templete we will use to create an Accelerator in next steps: 
+###### Create custom Accelerator
 
 ```execute
 tanzu accelerator create {{ session_namespace }} --git-repository https://gitlab.tap.tanzupartnerdemo.com/gitlab-instance-081097ef/partnertapdemo-app --git-branch main --display-name "$SESSION_NAME" --secret-ref git-credentials
@@ -42,7 +42,7 @@ tanzu accelerator create {{ session_namespace }} --git-repository https://gitlab
 tanzu accelerator list 
 ```
 
-###### In windows JB, Access the url https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/create/templates/{{ session_namespace }} to generate accelerators. 
+###### In App Stream browser, Access the url https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/create/templates/{{ session_namespace }} to generate accelerators. 
 
 Note: Below steps are for reading only. 
 
