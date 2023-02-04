@@ -25,7 +25,7 @@ line: 84
 tanzu apps cluster-supply-chain list
 ```
 
-##### Access TAP GUI from windows JB: https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com , Navigate to Supply Chains and click on {{ session_namespace }}-git
+##### Access TAP GUI from App Stream browser: https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com , Navigate to Supply Chains and click on {{ session_namespace }}-git
 
 There are two sections within this view:
 
