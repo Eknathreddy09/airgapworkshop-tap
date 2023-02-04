@@ -62,8 +62,9 @@ mvn package
 
 ![Local host](images/airgap-16.png)
 
+##### As instructed during the briefing, please check the email from App Stream which contains a link to access App Stream, First login with temporary credentials, then reset the password and access Chrome app in App Stream. This will open a new browser session in App Stream which should 1-3 mins to load completely. Once launched successfully, Access the TAP URL and workloads from same browser. 
 
-###### Once the DNS record is created for Reposilite, then connect to windows JB and access the reposilite url: https://{{ session_namespace }} .tap.tanzupartnerdemo.com using Chrome Browser (incongnito preferred)
+###### Once the DNS record is created for Reposilite, access the reposilite url from App Stream browser: https://reposilite.{{ session_namespace }} .tap.tanzupartnerdemo.com using Chrome Browser (incongnito preferred)
 
 ![Local host](images/airgap-87.png)
 
@@ -177,7 +178,7 @@ mkdir -p org/apache/maven/apache-maven/3.6.3/
 mv apache-maven-3.6.3-bin.zip  org/apache/maven/apache-maven/3.6.3/
 ```
 
-##### In windows JB, open google chrome and access the url https://{{ session_namespace }}.tap.tanzupartnerdemo.com/#/releases and verify the copied files under releases as shown below: 
+##### Access the reposilite url from App Stream browser: https://reposilite{{ session_namespace }}.tap.tanzupartnerdemo.com/#/releases and verify the copied files under releases as shown below: 
 
 ![Local host](images/airgap-88.png)
 
