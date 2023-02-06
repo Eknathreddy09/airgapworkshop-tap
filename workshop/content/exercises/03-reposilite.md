@@ -70,7 +70,7 @@ url: https://appstream2.us-west-2.aws.amazon.com/userpools#/signin?ref=zla9Qvv2b
 
 ![Local host](images/airgap-111.png)
 
-###### Once the DNS record is created for Reposilite, access the reposilite url from App Stream browser: https://reposilite.{{ session_namespace }}.tap.tanzupartnerdemo.com using Chrome Browser (incongnito preferred)
+###### Once the DNS record is created for Reposilite, access the reposilite url from App Stream browser: https://reposilite.{{ session_namespace }}.tap.tanzupartnerdemo.com{{copy}} using Chrome Browser (incongnito preferred)
 
 ![Local host](images/airgap-112.png)
 
@@ -184,7 +184,7 @@ mkdir -p org/apache/maven/apache-maven/3.6.3/
 mv apache-maven-3.6.3-bin.zip  org/apache/maven/apache-maven/3.6.3/
 ```
 
-##### Access the reposilite url from App Stream browser: https://reposilite.{{ session_namespace }}.tap.tanzupartnerdemo.com/#/releases and verify the copied files under releases as shown below: 
+##### Access the reposilite url from App Stream browser: https://reposilite.{{ session_namespace }}.tap.tanzupartnerdemo.com/#/releases{{copy}} and verify the copied files under releases as shown below: 
 
 ![Local host](images/airgap-113.png)
 
