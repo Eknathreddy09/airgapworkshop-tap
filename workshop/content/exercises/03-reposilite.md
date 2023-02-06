@@ -62,11 +62,17 @@ mvn package
 
 ![Local host](images/airgap-16.png)
 
-##### As instructed during the briefing, please check the email from App Stream which contains a link to access App Stream, First login with temporary credentials, then reset the password and access Chrome app in App Stream. This will open a new browser session in App Stream which should 1-3 mins to load completely. Once launched successfully, Access the TAP URL and workloads from same browser. 
+##### As instructed during the briefing, please check the email from App Stream which contains a link to access App Stream, First login with temporary credentials, then reset the password and access Chrome app in App Stream. This will open a new browser session in App Stream which should take 1-3 mins to load completely. 
 
-###### Once the DNS record is created for Reposilite, access the reposilite url from App Stream browser: https://reposilite.{{ session_namespace }} .tap.tanzupartnerdemo.com using Chrome Browser (incongnito preferred)
+```dashboard:open-url
+url: https://appstream2.us-west-2.aws.amazon.com/userpools#/signin?ref=zla9Qvv2bG
+```
 
-![Local host](images/airgap-87.png)
+![Local host](images/airgap-111.png)
+
+###### Once the DNS record is created for Reposilite, access the reposilite url from App Stream browser: https://reposilite.{{ session_namespace }}.tap.tanzupartnerdemo.com using Chrome Browser (incongnito preferred)
+
+![Local host](images/airgap-112.png)
 
 <p style="color:blue"><strong> Now, lets copy the files into Reposilite pod using below commands:   </strong></p>
 
@@ -178,9 +184,9 @@ mkdir -p org/apache/maven/apache-maven/3.6.3/
 mv apache-maven-3.6.3-bin.zip  org/apache/maven/apache-maven/3.6.3/
 ```
 
-##### Access the reposilite url from App Stream browser: https://reposilite{{ session_namespace }}.tap.tanzupartnerdemo.com/#/releases and verify the copied files under releases as shown below: 
+##### Access the reposilite url from App Stream browser: https://reposilite.{{ session_namespace }}.tap.tanzupartnerdemo.com/#/releases and verify the copied files under releases as shown below: 
 
-![Local host](images/airgap-88.png)
+![Local host](images/airgap-113.png)
 
 ```execute
 exit
