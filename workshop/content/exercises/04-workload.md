@@ -92,7 +92,7 @@ text: {{ session_namespace }}
 scp -i $HOME/tap-workshop.pem -r $HOME/tanzu-java-web-app/ {{ session_namespace }}@10.0.1.62:/home/{{ session_namespace }}/
 ```
 
-##### Deploy a workload ({{ session_namespace }}-app) using local path: 
+##### Deploy a workload (app) using local path: 
 
 ```execute
 tanzu apps workload create app --local-path tanzu-java-web-app/ --type web -n tap-workload --source-image harborairgap.tanzupartnerdemo.com/{{ session_namespace }}/build-service/{{ session_namespace }}-source-new --param-yaml buildServiceBindings='[{"name": "settings-xml", "kind": "Secret"}, {"name": "ca-certificate", "kind": "Secret"}]' --build-env "BP_MAVEN_BUILD_ARGUMENTS=-debug -Dmaven.test.skip=true --no-transfer-progress package" -y
@@ -132,7 +132,7 @@ tanzu apps workload list -n tap-workload
 ###### Apply Annotation
 
 ```execute
-tanzu apps workload apply {{ session_namespace }}-app --annotation autoscaling.knative.dev/minScale=1 -n tap-workload -y
+tanzu apps workload apply app --annotation autoscaling.knative.dev/minScale=1 -n tap-workload -y
 ```
 
 ![Local host](images/airgap-90.png)
@@ -140,7 +140,7 @@ tanzu apps workload apply {{ session_namespace }}-app --annotation autoscaling.k
 ###### Note: Workload creation takes 5 mins to complete, proceed further once you see ready status
 
 ```execute
-tanzu apps workload get {{ session_namespace }}-app -n tap-workload
+tanzu apps workload get app -n tap-workload
 ```
 
 ![Workload](images/airgap-82.png)
