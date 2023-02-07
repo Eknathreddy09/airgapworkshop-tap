@@ -13,7 +13,7 @@ kubectl create ns reposilite
 <p style="color:blue"><strong> Create secret using the pem files already saved in JB </strong></p>
 
 ```execute
-kubectl create secret tls  my-tls-secret --cert=$HOME/fullchain.pem  --key=$HOME/privkey.pem -n reposilite
+kubectl create secret tls  my-tls-secret --cert=$HOME/{{ session_namespace }}.fullchain.pem  --key=$HOME/{{ session_namespace }}.privkey.pem -n reposilite
 ```
 
 <p style="color:blue"><strong> Apply reprosilite yaml file in namespace reposilite </strong></p>
