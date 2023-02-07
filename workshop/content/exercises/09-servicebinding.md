@@ -60,6 +60,10 @@ SHOW TABLES;
 ```
 
 ```execute
+GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' IDENTIFIED BY "pass";
+```
+
+```execute
 \q
 ```
 
