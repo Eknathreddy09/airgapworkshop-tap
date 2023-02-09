@@ -4,14 +4,15 @@
 
 1. Prepare TAP values file
 2. Complete the pre reqs for installing TAP packages in airgap environment
-3. Install TAP with full profile (OOTB Basic)
+3. Install TAP with full profile (OOTB Test and Scan)
 4. Setup Reposilite
 5. Create a workload - locally, git and prebuild image
 6. Explore App Live view, Supply chain and TAP GUI
 7. Create Accelerators
 8. Explore Service Bindings and Grype
 9. Deploy metadata store with external DB
-10. Inner Loop
+10. Security Analysis
+11. Inner Loop
 
 ###### For more info, refer to VMware official documentation on TAP 1.4: 
 
