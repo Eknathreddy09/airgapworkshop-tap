@@ -11,6 +11,12 @@ scp -i tap-workshop.pem -r $HOME/tanzu-java-web-app/ $SESSION_NAME@10.0.1.62:/ho
 cd tanzu-java-web-app && git init && git add . && git commit -m "updated changes" && git remote remove origin && git remote add origin https://gitlab.tap.tanzupartnerdemo.com/gitlab-instance-081097ef/$SESSION_NAME-repo.git && git push https://root:Newstart1@gitlab.tap.tanzupartnerdemo.com/gitlab-instance-081097ef/$SESSION_NAME-repo HEAD:main --force
 ```
 
+<p style="color:blue"><strong> The default maximum allowed built age of Grype’s vulnerability database is 5 days. This means that scanning with a 6 day old database causes the scan to fail. Below secret yaml uses the GRYPE_DB_MAX_ALLOWED_BUILT_AGE parameter to override the default value. </strong></p>
+
+```execute
+kubectl apply -f $HOME/secret-overwriteagegrype.yaml
+```
+
 <p style="color:blue"><strong> Review Tap values file </strong></p>
 
 ```execute
