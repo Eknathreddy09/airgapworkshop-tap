@@ -111,7 +111,7 @@ scp -i $HOME/tap-workshop.pem -r $HOME/tanzu-java-web-app/ {{ session_namespace 
 ##### Deploy a workload (app) using local path: 
 
 ```execute
-tanzu apps workload create app --local-path tanzu-java-web-app/ --type web -n tap-workload --source-image harborairgap.tanzupartnerdemo.com/{{ session_namespace }}/build-service/{{ session_namespace }}-source-new --param-yaml buildServiceBindings='[{"name": "settings-xml", "kind": "Secret"}, {"name": "ca-certificate", "kind": "Secret"}]' --build-env "BP_MAVEN_BUILD_ARGUMENTS=-debug -Dmaven.test.skip=true --no-transfer-progress package" -y
+tanzu apps workload create app --local-path tanzu-java-web-app/ --type web -n tap-workload --label apps.tanzu.vmware.com/has-tests=true --source-image harborairgap.tanzupartnerdemo.com/{{ session_namespace }}/build-service/{{ session_namespace }}-source-new --param-yaml buildServiceBindings='[{"name": "settings-xml", "kind": "Secret"}, {"name": "ca-certificate", "kind": "Secret"}]' --build-env "BP_MAVEN_BUILD_ARGUMENTS=-debug -Dmaven.test.skip=true --no-transfer-progress package" -y
 ```
 
 ![Local host](images/airgap-19.png)
