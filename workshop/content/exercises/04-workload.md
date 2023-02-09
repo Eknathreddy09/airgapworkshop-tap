@@ -169,7 +169,7 @@ kubectl get pods -n tap-workload
 
 ![Workload](images/airgap-83.png)
 
-<p style="color:blue"><strong> Access the deployed application in App Stream browser- https://app.tap-workload.{{ session_namespace }}.tap.tanzupartnerdemo.com</strong></p>
+<p style="color:blue"><strong> Access the deployed application in App Stream browser- https://app.tap-workload.{{ session_namespace }}.tap.tanzupartnerdemo.com {{copy}} </strong></p>
 
 ![Workload](images/airgap-92.png)
 
@@ -213,7 +213,7 @@ tanzu apps workload get gitapp -n tap-workload
 
 ![Workload](images/airgap-93.png)
 
-<p style="color:blue"><strong> Access the deployed application in App Stream browser- https://gitapp.tap-workload.{{ session_namespace }}.tap.tanzupartnerdemo.com</strong></p>
+<p style="color:blue"><strong> Access the deployed application in App Stream browser- https://gitapp.tap-workload.{{ session_namespace }}.tap.tanzupartnerdemo.com {{copy}} </strong></p>
 
 ![Workload](images/airgap-96.png)
 
@@ -248,6 +248,6 @@ tanzu apps workload get img -n tap-workload
 ![Workload from Image](images/airgap-97.png)
 
 
-<p style="color:blue"><strong> Access the deployed application in App Stream browser- https://img.tap-workload.{{ session_namespace }}.tap.tanzupartnerdemo.com </strong></p>
+<p style="color:blue"><strong> Access the deployed application in App Stream browser - https://img.tap-workload.{{ session_namespace }}.tap.tanzupartnerdemo.com {{copy}} </strong></p>
 
 ![Application Access](images/airgap-99.png)
