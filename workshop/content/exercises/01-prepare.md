@@ -67,19 +67,19 @@ kubectl config get-contexts
 
 <p style="color:blue"><strong> Set up environment variables for installation </strong></p>
 
-```execute-all
+```execute-1
 export IMGPKG_REGISTRY_USERNAME=admin
 ```
 
-```execute-all
+```execute-1
 export IMGPKG_REGISTRY_PASSWORD=Harbor12345
 ```
 
-```execute-all
+```execute-1
 export IMGPKG_REGISTRY_HOSTNAME=harborairgap.tanzupartnerdemo.com
 ```
 
-```execute-all
+```execute-2
 export TAP_VERSION=1.4.0
 ```
 
