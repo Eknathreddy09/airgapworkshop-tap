@@ -38,7 +38,7 @@ loadbalancer=$(kubectl get svc envoy -n tanzu-system-ingress -o jsonpath='{.stat
 echo $loadbalancer
 ```
 
-#### Note: Provide the loadbalancer hostname and {{ session_namespace }} to SE in chat. 
+#### Note: Provide the loadbalancer hostname and {{ session_namespace }} to SE in chat to create wildcard DNS for *.{{ session_namespace }}.tap.tanzupartnerdemo.com	in Route53 private hosted zone. 
 
 ```execute-2
 cd $HOME/tanzu-java-web-app
@@ -184,9 +184,18 @@ mkdir -p org/apache/maven/apache-maven/3.6.3/
 mv apache-maven-3.6.3-bin.zip  org/apache/maven/apache-maven/3.6.3/
 ```
 
+```execute
+kubectl cp $HOME/vulnerability-db_v5_2023-02-08T08-17-20Z_6ef73016d160043c630f.tar.gz $reposilitepod:/app/data/repositories/releases -n reposilite
+```
+
+```execute
+kubectl cp listing.json $reposilitepod:/app/data/repositories/releases -n reposilite
+```
+
 ##### Access the reposilite url from App Stream browser: https://reposilite.{{ session_namespace }}.tap.tanzupartnerdemo.com/#/releases{{copy}} and verify the copied files under releases as shown below: 
 
 ![Local host](images/airgap-113.png)
+
 
 ```execute
 exit
