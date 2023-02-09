@@ -8,10 +8,26 @@ cat $HOME/developer.yaml
 cat $HOME/settings-xml.yaml
 ```
 
+```execute
+cat $HOME/scanpolicy.yaml
+```
+
+```execute
+cat $HOME/tekton-pipeline.yaml
+```
+
 <p style="color:blue"><strong> Setup developer namespace </strong></p>
 
 ```execute
 kubectl apply -f $HOME/developer.yaml -n tap-workload
+```
+
+```execute
+kubectl apply -f $HOME/scanpolicy.yaml -n tap-workload
+```
+
+```execute
+kubectl apply -f $HOME/tekton-pipeline.yaml -n tap-workload
 ```
 
 ```execute
@@ -104,7 +120,7 @@ tanzu apps workload create app --local-path tanzu-java-web-app/ --type web -n ta
 <p style="color:blue"><strong> Get the status of deployed application </strong></p>
 
 ```execute
-tanzu apps workload get {{ session_namespace }}-app -n tap-workload
+tanzu apps workload get app -n tap-workload
 ```
 
 ![Local host](images/airgap-20.png)
@@ -112,7 +128,7 @@ tanzu apps workload get {{ session_namespace }}-app -n tap-workload
 <p style="color:blue"><strong> Check the live progress of application </strong></p>
 
 ```execute-1
-tanzu apps workload tail {{ session_namespace }}-app --since 10m --timestamp -n tap-workload
+tanzu apps workload tail app --since 10m --timestamp -n tap-workload
 ```
 
 ![Local host](images/airgap-81.png)
@@ -182,7 +198,7 @@ tanzu apps workload list -n tap-workload
 ```
 
 ```execute
-tanzu apps workload tail {{ session_namespace }}-git --namespace tap-workload
+tanzu apps workload tail gitapp --namespace tap-workload
 ```
 
 ![Workload](images/airgap-94.png)
@@ -192,7 +208,7 @@ tanzu apps workload tail {{ session_namespace }}-git --namespace tap-workload
 ```
 
 ```execute
-tanzu apps workload get {{ session_namespace }}-git -n tap-workload
+tanzu apps workload get gitapp -n tap-workload
 ```
 
 ![Workload](images/airgap-93.png)
@@ -218,7 +234,7 @@ tanzu apps workload create fromimage --image harborairgap.tanzupartnerdemo.com/t
 ```
 
 ```execute-1
-tanzu apps workload tail {{ session_namespace }}-fromimage --namespace tap-workload
+tanzu apps workload tail fromimage --namespace tap-workload
 ```
 
 ```execute-1
@@ -226,7 +242,7 @@ tanzu apps workload tail {{ session_namespace }}-fromimage --namespace tap-workl
 ```
 
 ```execute
-tanzu apps workload get {{ session_namespace }}-fromimage -n tap-workload
+tanzu apps workload get fromimage -n tap-workload
 ```
 
 ![Workload from Image](images/airgap-97.png)
