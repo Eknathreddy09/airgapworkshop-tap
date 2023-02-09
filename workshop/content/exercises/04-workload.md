@@ -217,6 +217,12 @@ tanzu apps workload get gitapp -n tap-workload
 
 ![Workload](images/airgap-96.png)
 
+###### Apply Annotation
+
+```execute
+tanzu apps workload apply gitapp --annotation autoscaling.knative.dev/minScale=1 -n tap-workload -y
+```
+
 ### Pre-build image: 
 
 ```dashboard:open-url
@@ -251,3 +257,10 @@ tanzu apps workload get img -n tap-workload
 <p style="color:blue"><strong> Access the deployed application in App Stream browser - https://img.tap-workload.{{ session_namespace }}.tap.tanzupartnerdemo.com {{copy}} </strong></p>
 
 ![Application Access](images/airgap-99.png)
+
+
+###### Apply Annotation
+
+```execute
+tanzu apps workload apply img --annotation autoscaling.knative.dev/minScale=1 -n tap-workload -y
+```
