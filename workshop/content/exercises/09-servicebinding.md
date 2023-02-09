@@ -59,6 +59,8 @@ USE test;
 SHOW TABLES;
 ```
 
+![Local host](images/db-1.png)
+
 ```execute
 GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' IDENTIFIED BY "pass";
 ```
@@ -71,32 +73,35 @@ GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' IDENTIFIED BY "pass";
 exit
 ```
 
-```execute-2
-cd $HOME/spring-petclinic && mvn package
-```
-
-```execute-2
-scp -i ~/tap-workshop.pem $HOME/spring-petclinic/target/spring-petclinic-2.6.0-SNAPSHOT.jar $SESSION_NAME@10.0.1.62:/home/$SESSION_NAME
+```execute
+tanzu apps workload apply -f $HOME/workload-springpetclinic.yaml --local-path $HOME/spring-petclinic-2.6.0-SNAPSHOT.jar --source-image harborairgap.tanzupartnerdemo.com/{{ session_namespace }}/spring-petclinic-source -n tap-workload --type web --label apps.tanzu.vmware.com/has-tests=true -y
 ```
 
 ```execute
-tanzu apps workload apply -f workload-springpetclinic.yaml --local-path $HOME/spring-petclinic-2.6.0-SNAPSHOT.jar --source-image harborairgap.tanzupartnerdemo.com/tapairgap/{{ session_namespace }}-source -n tap-workload -y
+tanzu apps workload get sbtest -n tap-workload
 ```
 
 ```execute
-tanzu apps workload get sb-app -n tap-workload
-```
-
-```execute
-tanzu apps workload tail sb-app --since 10m --timestamp -n tap-workload
+tanzu apps workload tail sbtest --since 10m --timestamp -n tap-workload
 ```
 
 ```execute
 <ctrl+c>
 ```
 
-Access the workload https://sbtest.tap-workload.{{ session_namespace }}.tap.tanzupartnerdemo.com from App Stream browser url
+```execute
+tanzu apps workload get sbtest -n tap-workload
+```
 
+![Local host](images/sb-3.png)
+
+Access the workload https://sbtest.tap-workload.{{ session_namespace }}.tap.tanzupartnerdemo.com {{copy}} from App Stream browser url
+
+![Local host](images/sb-4.png)
+
+```execute
+kubectl exec -it $dbpod -n tap-workload -- bash
+```
 
 <p style="color:blue"><strong> Connect to DB, by providing the password as "secret" </strong></p>
 
@@ -129,8 +134,15 @@ select * from owners;
 
 Now get back to App stream and add owner details: 
 
-Find owner 
+Find Owners > Add Owner > 
+
+![Local host](images/sb-5.png)
+
+
+![Local host](images/sb-6.png)
 
 ```execute
 select * from owners;
 ```
+
+![Local host](images/sb-7.png)
