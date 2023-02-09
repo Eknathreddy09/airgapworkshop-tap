@@ -5,7 +5,7 @@ Tanzu Application Platform provides an easy way to browse and consume templates 
 We're going to check out **Application Accelerator** by accessing the below url in App Stream browser. 
 
 
-###### https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/create
+###### https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/create {{copy}}
 
 
 Now, you can discover a template that is appropriate for the programming language (e.g. Java, .NET, Node) and the application type (i.e. Web, message-driven, function). You can use the template to start a new project, or use the template to migrate a pre-existing application.
@@ -24,7 +24,7 @@ kubectl get pods -n accelerator-system
 
 Access the url in App Stream browser to check the accelerator file that will be used in next steps: 
 
-##### https://gitlab.tap.tanzupartnerdemo.com/gitlab-instance-081097ef/partnertapdemo-app/-/blob/main/accelerator.yaml
+##### https://gitlab.tap.tanzupartnerdemo.com/gitlab-instance-081097ef/partnertapdemo-app/-/blob/main/accelerator.yaml {{copy}}
 
 ##### Check the Accelerator section for details: 
 
@@ -42,7 +42,7 @@ tanzu accelerator create {{ session_namespace }} --git-repository https://gitlab
 tanzu accelerator list 
 ```
 
-###### In App Stream browser, Access the url https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/create/templates/{{ session_namespace }} to generate accelerators. 
+###### In App Stream browser, Access the url https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/create/templates/{{ session_namespace }} {{copy}} to generate accelerators. 
 
 Note: Below steps are for reading only. 
 
