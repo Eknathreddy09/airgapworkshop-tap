@@ -29,7 +29,7 @@ kubectl get pods -n tap-gui
 kubectl create secret tls tap-gui-secret --key="privkey.pem" --cert="fullchain.pem" -n tap-gui
 ```
 
-###### Remove # from lines ( 103-105 ) of tap-values.yaml, located in home directory 
+###### Remove # from lines ( 206-208 ) of tap-values.yaml, located in home directory 
 
 ```execute
 vi $HOME/tap-values.yaml
@@ -44,6 +44,6 @@ vi $HOME/tap-values.yaml
 tanzu package installed update tap -f tap-values.yaml -n tap-install
 ```
 
-<p style="color:blue"><strong> Access TAP-GUI url in App Stream browser: https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com </strong></p>
+<p style="color:blue"><strong> Access TAP-GUI url in App Stream browser: https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com {{copy}} </strong></p>
 
 ![TAP GUI](images/tapgui-23.png)
