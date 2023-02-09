@@ -230,11 +230,11 @@ tanzu apps workload list -n tap-workload
 Note: Image is already created for this workshop and uploaded to Harbor Registry. 
 
 ```execute
-tanzu apps workload create fromimage --image harborairgap.tanzupartnerdemo.com/tapairgap/prebuildimage:latest --type web --app {{ session_namespace }}-fromimage -n tap-workload -y
+tanzu apps workload create img --image harborairgap.tanzupartnerdemo.com/tapairgap/prebuildimage:latest --type web --app {{ session_namespace }}-fromimage -n tap-workload -y
 ```
 
 ```execute-1
-tanzu apps workload tail fromimage --namespace tap-workload
+tanzu apps workload tail img --namespace tap-workload
 ```
 
 ```execute-1
@@ -242,12 +242,12 @@ tanzu apps workload tail fromimage --namespace tap-workload
 ```
 
 ```execute
-tanzu apps workload get fromimage -n tap-workload
+tanzu apps workload get img -n tap-workload
 ```
 
 ![Workload from Image](images/airgap-97.png)
 
 
-<p style="color:blue"><strong> Access the deployed application in App Stream browser- https://fromimage.tap-workload.{{ session_namespace }}.tap.tanzupartnerdemo.com </strong></p>
+<p style="color:blue"><strong> Access the deployed application in App Stream browser- https://img.tap-workload.{{ session_namespace }}.tap.tanzupartnerdemo.com </strong></p>
 
 ![Application Access](images/airgap-99.png)
