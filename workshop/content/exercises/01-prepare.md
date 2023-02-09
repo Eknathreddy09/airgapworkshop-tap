@@ -261,3 +261,7 @@ sed -i -r "s/reposiliteairgap/$SESSION_NAME/g" $HOME/reprosilite.yaml
 ```execute
 sed -i -r "s/reposiliteurl/$SESSION_NAME/g" $HOME/settings-xml.yaml
 ```
+
+```execute
+sed -i -r "s/SESSION_NAME/$SESSION_NAME/g" $HOME/listing.json
+```
