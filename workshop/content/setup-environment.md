@@ -16,4 +16,4 @@ After the container is built, it updates every time there’s a new code commit 
 
 This workshop will give you an understanding of how operators will interact with the platform to enable iterative development cycles, and secure, automated delivery to production.
 
-![Local host](exercises/images/tapairgapworkshop-arch.jpg)
+![Local host](exercises/images/tapairgapworkshop-arch.png)
