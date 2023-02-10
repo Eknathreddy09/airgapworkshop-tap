@@ -48,12 +48,19 @@ tanzu insight config set-target https://$METADATA_STORE_DOMAIN --ca-cert insight
 tanzu insight health
 ```
 
-<p style="color:red"> Note: For this demo, we have already generated an image report in CycloneDX format using grype </p>
+<p style="color:red"> Generate an image report in CycloneDX format using grype </p>
+
+
+```execute
+grype harborairgap.tanzupartnerdemo.com/tapairgap/spring-pet-clinic-1source@sha256:0ef334bbb85925837dacad88493e98a50a01a6ce2a5f76807ea467424c4ea5ff -o cyclonedx > $HOME/IMAGE-CVE-REPORT
+```
+
+![Local host](images/grype-11.png)
 
 <p style="color:blue"><strong> To add a CycloneDX-formatted image report </strong></p>
 
 ```execute
-tanzu insight image add --cyclonedxtype xml --path $HOME/image-cve-report
+tanzu insight image add --cyclonedxtype xml --path $HOME/IMAGE-CVE-REPORT
 ```
 
 <p style="color:blue"><strong> Filter the dependencies that are affected with CVE-2020-16156 </strong></p>
@@ -77,6 +84,6 @@ tanzu insight package images --name perl-base
 <p style="color:blue"><strong> List the packages & CVEs of a specific image </strong></p>
 
 ```execute
-tanzu insight image get --digest sha256:eb23306afab28c48bb9e3ae2b8fbff35e20d3da5016779317665ea448846efb1
+tanzu insight image get --digest sha256:e58006551f45d57258c1b3b14a7bc346460e44237ca34e6504995c538ed3df35
 ```
 
