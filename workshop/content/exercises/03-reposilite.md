@@ -185,6 +185,10 @@ mv apache-maven-3.6.3-bin.zip  org/apache/maven/apache-maven/3.6.3/
 ```
 
 ```execute
+exit
+```
+
+```execute
 kubectl cp $HOME/vulnerability-db_v5_2023-02-08T08-17-20Z_6ef73016d160043c630f.tar.gz $reposilitepod:/app/data/repositories/releases -n reposilite
 ```
 
