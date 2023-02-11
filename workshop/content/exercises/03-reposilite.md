@@ -200,7 +200,3 @@ kubectl cp listing.json $reposilitepod:/app/data/repositories/releases -n reposi
 
 ![Local host](images/airgap-113.png)
 
-
-```execute
-exit
-```
