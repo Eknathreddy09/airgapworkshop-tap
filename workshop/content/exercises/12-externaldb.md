@@ -39,13 +39,13 @@ cat $HOME/tap-values.yaml
 <p style="color:blue"><strong> retrieve the access token and store it in variable</strong></p>
 
 ```execute
-select id,created_at,cve_id,url,cna from vulnerabilities;
+select id,created_at,cve_id,url,cna from vulnerabilities limit 25;
 ```
 
 <p style="color:blue"><strong> retrieve the access token and store it in variable</strong></p>
 
 ```execute
-select * from package_vulnerabilities;
+select * from package_vulnerabilities limit 5;
 ```
 
 <p style="color:blue"><strong> retrieve the access token and store it in variable</strong></p>
