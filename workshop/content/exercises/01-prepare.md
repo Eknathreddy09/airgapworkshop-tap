@@ -247,11 +247,7 @@ kubectl create -f $HOME/secret.yaml -n tap-workload
 <p style="color:blue"><strong> Changes to tap values file" </strong></p>
 
 ```execute
-sed -i -r "s/SESSION_NAME/$SESSION_NAME/g" $HOME/tap-values.yaml
-```
-
-```execute
-sed -i -r "s/providecadata/$cadata/g" $HOME/tap-values.yaml
+sed -i -r "s/SESSION_NAME/$SESSION_NAME/g" $HOME/tap-values.yaml && sed -i -r "s/providecadata/$cadata/g" $HOME/tap-values.yaml && dbname=$(cut -c 16-19 <<< '{{ session_namespace }}') && sed -i -r "s/DB_NAME/$dbname/g" $HOME/tap-values.yaml
 ```
 
 ```execute
