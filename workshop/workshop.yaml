@@ -14,8 +14,10 @@ modules:
     - exercises/08-accelerators
     - exercises/09-servicebinding
     - exercises/10-gitopsworkflow
-    - exercises/11-grype
-    - exercises/12-externaldb
-    - exercises/13-Innerloop
-    - exercises/14-Cleanup
+    - exercises/11-security-analysis
+    - exercises/12-grype
+    - exercises/13-externaldb
+    - exercises/14-testscan
+    - exercises/15-Innerloop
+    - exercises/16-Cleanup
     - workshop-summary
