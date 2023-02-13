@@ -34,17 +34,23 @@ modules:
         exit_sign: GitOps
     exercises/10-gitopsworkflow:
         name: GitOps workflow
+        exit_sign: Security Analysis
+    exercises/11-security-analysis:
+        name: Security Analysis
         exit_sign: Grype
-    exercises/11-grype:
+    exercises/12-grype:
         name: Grype
         exit_sign: External DB
-    exercises/12-externaldb:
+    exercises/13-externaldb:
         name: External DB for Metadata store
+        exit_sign: Scan Test
+    exercises/14-testscan:
+        name: Use Case on OOTB Scan
         exit_sign: Innerloop
-    exercises/13-Innerloop:
-        name: Inner Leep
+    exercises/15-Innerloop:
+        name: Inner Loop
         exit_sign: Cleanup
-    exercises/14-Cleanup:
+    exercises/16-Cleanup:
         name: Cleanup
         exit_sign: Next    
     workshop-summary:
