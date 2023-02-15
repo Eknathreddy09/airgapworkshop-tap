@@ -62,7 +62,7 @@ select * from ratings WHERE score > 5 LIMIT 10;
 
 Note: You can explore the tables by using custom queries for few minutes before exiting the DB. 
 
-<p style="color:blue"><strong> retrieve the access token and store it in variable</strong></p>
+<p style="color:blue"><strong> Exit the DB console </strong></p>
 
 ```execute
 \q
