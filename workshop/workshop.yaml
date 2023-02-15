@@ -13,8 +13,8 @@ modules:
     - exercises/07-applive
     - exercises/08-accelerators
     - exercises/09-servicebinding
-    - exercises/11-security-analysis
-    - exercises/12-grype
+    - exercises/11-grype
+    - exercises/12-security-analysis
     - exercises/13-externaldb
     - exercises/14-testscan
     - exercises/16-Cleanup
