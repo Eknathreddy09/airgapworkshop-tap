@@ -92,6 +92,8 @@ tanzu apps workload tail sbtest --since 10m --timestamp -n tap-workload
 <ctrl+c>
 ```
 
+<p style="color:blue"><strong> Check the deployed workload info and it should be in Ready state </strong></p>
+
 ```execute
 tanzu apps workload get sbtest -n tap-workload
 ```
@@ -102,6 +104,8 @@ Access the workload https://sbtest.tap-workload.{{ session_namespace }}.tap.tanz
 
 ![Local host](images/sb-4.png)
 
+<p style="color:blue"><strong> Connect to DB pod </strong></p>
+
 ```execute
 kubectl exec -it $dbpod -n tap-workload -- bash
 ```
@@ -111,31 +115,26 @@ kubectl exec -it $dbpod -n tap-workload -- bash
 ```execute
 mysql -h spring-petclinic-db -uroot -p
 ```
-<p style="color:blue"><strong> Review below yaml files </strong></p>
 
-```execute
-SHOW DATABASES;
-```
-
-<p style="color:blue"><strong> Review below yaml files </strong></p>
+<p style="color:blue"><strong> Connect to DB "test" </strong></p>
 
 ```execute
 USE test;
 ```
 
-<p style="color:blue"><strong> Review below yaml files </strong></p>
+<p style="color:blue"><strong> You can see the tables listed now </strong></p>
 
 ```execute
 SHOW TABLES;
 ```
 
-<p style="color:blue"><strong> Review below yaml files </strong></p>
+<p style="color:blue"><strong> Query the owners, these are default values </strong></p>
 
 ```execute
 select * from owners;
 ```
 
-Now get back to App stream and add owner details: 
+Now get back to App stream, url: https://sbtest.tap-workload.{{ session_namespace }}.tap.tanzupartnerdemo.com {{copy}} and add owner details: 
 
 Find Owners > Add Owner > 
 
@@ -144,15 +143,21 @@ Find Owners > Add Owner >
 
 ![Local host](images/sb-6.png)
 
+<p style="color:blue"><strong> Query the table and you can find the added owners in output </strong></p>
+
 ```execute
 select * from owners;
 ```
 
 ![Local host](images/sb-7.png)
 
+<p style="color:blue"><strong> Exit DB console </strong></p>
+
 ```execute
 \q
 ```
+
+<p style="color:blue"><strong> Exit DB pod bash console </strong></p>
 
 ```execute
 exit
