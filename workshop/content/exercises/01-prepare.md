@@ -101,29 +101,12 @@ echo $cadata
 docker login harborairgap.tanzupartnerdemo.com -u $IMGPKG_REGISTRY_USERNAME -p $IMGPKG_REGISTRY_PASSWORD
 ```
 
-<p style="color:blue"><strong> Log in to the VMware Tanzu Network registry with your VMware Tanzu Network credentials </strong></p>
+Note: For this workshop, I have already downloaded the required tar files from Tanzu registry into Terminal-2 using the commands: 
 
-```execute-2
-docker login registry.tanzu.vmware.com
-```
-
-<p style="color:blue"><strong> Copy the Tanzu Application Platform images into a .tar file from the VMware Tanzu Network </strong></p>
-
-###### Note: Please wait till you see Succeeded message in Terminal-2, should take around 3-5 mins to complete. 
-
-```execute-2
 imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:$TAP_VERSION --to-tar $HOME/tap-packages-$TAP_VERSION.tar --include-non-distributable-layers
-```
 
-![Local host](images/airgap-3.png)
-
-<p style="color:blue"><strong> Copy the Tanzu build service images into a .tar file from the VMware Tanzu Network</strong></p>
-
-###### Note: Please wait till you see Succeeded message in Terminal-2, should take around 3-5 mins to complete. 
-
-```execute-2
 imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/full-tbs-deps-package-repo:1.9.0 --to-tar=$HOME/tbs-full-deps.tar
-```
+
 
 ![Local host](images/airgap-4.png)
 
