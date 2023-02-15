@@ -25,7 +25,7 @@ The Security Analysis plug-in has a CVE page and a Package page. These are acces
 
 Click on deployed app **git** by navigating to url in Appstream browser
 
-Access the url **https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/supply-chain/host/tap-workload/git/source-scanner** {{ copy }} in AppStream chrome browser
+To check the list of vulnerabilities: Access the url **https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/supply-chain/host/tap-workload/git/source-scanner** {{ copy }} in AppStream chrome browser
 
 
 ![Security Analysis](images/SA-3.png)
