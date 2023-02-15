@@ -6,7 +6,7 @@ The Security Analysis plug-in is part of the Tanzu Application Platform Full and
 The Security Analysis plug-in is always accessible from the left navigation panel. Click the Security Analysis button to open the Security Analysis dashboard.
 
 ```dashboard:open-url
-url: https://tap-gui.workshop.tap.tanzupartnerdemo.com/security-analysis
+url: https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/security-analysis
 ```
 
 ![Security Analysis](images/SA-1.png)
