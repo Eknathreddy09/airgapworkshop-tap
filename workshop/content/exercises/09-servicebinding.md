@@ -146,3 +146,11 @@ select * from owners;
 ```
 
 ![Local host](images/sb-7.png)
+
+```execute
+\q
+```
+
+```execute
+exit
+```
