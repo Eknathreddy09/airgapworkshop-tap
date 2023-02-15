@@ -1,7 +1,7 @@
 Supply Chain Security Tools - Store saves software bills of materials (SBoMs) to a database and allows you to query for image, source code, package, and vulnerability relationships. It integrates with Supply Chain Security Tools - Scan to automatically store the resulting source code and image vulnerability reports. It accepts CycloneDX input and outputs in both human-readable and machine-readable formats, including JSON, text, and CycloneDX.
 
 
-Navigate to App Stream Browser > Access TapGUI > Supply Chains > https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/supply-chain/host/tap-workload/gitapp {{ copy }}
+Navigate to App Stream Browser > Access TapGUI > Supply Chains > https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/supply-chain/host/tap-workload/git {{ copy }}
 
 <p style="color:blue"><strong> List version information for metadata store package  </strong></p>
 
@@ -29,7 +29,7 @@ sed -i -r "s/ACCESS-TOKEN/$METADATA_STORE_ACCESS_TOKEN/g" $HOME/tap-values.yaml
 tanzu package installed update tap -f tap-values.yaml -n tap-install
 ```
 
-Navigate to App Stream Browser > Access TapGUI > Supply Chains > https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/supply-chain/host/tap-workload/gitapp {{ copy }}
+Navigate to App Stream Browser > Access TapGUI > Supply Chains > https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/supply-chain/host/tap-workload/git {{ copy }}
 
 ![Local host](images/sbom-10.png)
 
