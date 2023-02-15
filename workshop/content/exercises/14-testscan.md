@@ -32,9 +32,7 @@ tanzu apps workload get dev -n tap-workload
 tanzu apps workload tail dev --namespace tap-workload --timestamp --since 5m
 ```
 
-```dashboard:open-url in app stream url
-url: https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/supply-chain/host/tap-workload/dev
-```
+Access the url **https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/supply-chain/host/tap-workload/dev** {{ copy }} in App Stream chrome browser
 
 After few mins, you notice the workload deployment do not progress and few errors can be under workload supply chain in TAP GUI as shown below: 
 
@@ -72,15 +70,10 @@ ref Image: ![Scanpolicy](images/scan-3.png)
 
 ###### Verify in TAP GUI Supply chain status: 
 
-```dashboard:open-url - App Stream
-url: https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/supply-chain/host/tap-workload/dev
-```
+Access the url **https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/supply-chain/host/tap-workload/dev** {{ copy }} in App Stream chrome browser
 
 ref Image: ![Scanpolicy](images/scan-4.png)
 
-
-```dashboard:open-url
-url: https://dev.tap-workload.{{ session_namespace }}.tap.tanzupartnerdemo.com/
-```
+Access the url **https://dev.tap-workload.{{ session_namespace }}.tap.tanzupartnerdemo.com/** {{ copy }} in App Stream chrome browser to access the dev application that is just deployed. 
 
 ref Image: ![Scanpolicy](images/scan-5.png)
