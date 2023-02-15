@@ -26,7 +26,7 @@ kubectl get pods -n tap-gui
 #### TLS for TAP GUI: 
 
 ```execute
-kubectl create secret tls tap-gui-secret --key="tap-airgap-w01-s002.privkey.pem" --cert="tap-airgap-w01-s002.fullchain.pem" -n tap-gui
+kubectl create secret tls tap-gui-secret --key="{{ session_namespace }}.privkey.pem" --cert="{{ session_namespace }}.fullchain.pem" -n tap-gui
 ```
 
 ###### Remove # from lines ( 206-208 ) of tap-values.yaml, located in home directory 
