@@ -108,7 +108,15 @@ imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages
 imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/full-tbs-deps-package-repo:1.9.0 --to-tar=$HOME/tbs-full-deps.tar
 
 
-![Local host](images/airgap-4.png)
+<p style="color:blue"><strong> Verify the tar files </strong></p>
+
+```execute-2
+ls -ltrh | grep "tap-packages-$TAP_VERSION.tar"
+```
+
+```execute-2
+ls -ltrh | grep "tbs-full-deps.tar"
+```
 
 <p style="color:blue"><strong> Copy the downloaded Tanzu Application Platform tar file to internet restricted instance </strong></p>
 
