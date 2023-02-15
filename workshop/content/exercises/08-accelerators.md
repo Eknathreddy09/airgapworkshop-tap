@@ -5,7 +5,7 @@ Tanzu Application Platform provides an easy way to browse and consume templates 
 We're going to check out **Application Accelerator** by accessing the below url in App Stream browser. 
 
 
-###### https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/create {{copy}}
+###### https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/create {{ copy }}
 
 
 Now, you can discover a template that is appropriate for the programming language (e.g. Java, .NET, Node) and the application type (i.e. Web, message-driven, function). You can use the template to start a new project, or use the template to migrate a pre-existing application.
@@ -31,6 +31,8 @@ Access the url in App Stream browser to check the accelerator file that will be 
 ```execute
 cat $HOME/tap-values.yaml
 ```
+
+![Accelerator Templates](images/acc-10.png)
 
 ###### Create custom Accelerator
 
