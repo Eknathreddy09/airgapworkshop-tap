@@ -28,19 +28,21 @@ tanzu apps workload apply dev --annotation autoscaling.knative.dev/minScale=1 -n
 tanzu apps workload get dev -n tap-workload
 ```
 
-```execute-2
-tanzu apps workload tail dev -n tap-workload
+```execute
+tanzu apps workload tail dev --namespace tap-workload --timestamp --since 5m
 ```
 
-```dashboard:open-url
-https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/supply-chain/host/tap-workload/test
+```dashboard:open-url in app stream url
+url: https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/supply-chain/host/tap-workload/dev
 ```
 
 After few mins, you notice the workload deployment do not progress and few errors can be under workload supply chain in TAP GUI as shown below: 
 
 ref Image: ![Scanpolicy](images/scan-1.png)
 
+```execute
 ctrl+c
+```
 
 Add the CVE **GHSA-36p3-wjmg-h94x** to ignoreCves list as shown in below image: 
 
@@ -54,35 +56,31 @@ kubectl apply -f $HOME/scanpolicy.yaml -n tap-workload
 tanzu apps workload get dev -n tap-workload
 ```
 
-```dashboard:open-url
-url: http://tap-gui.{{ session_namespace }}.demo.tanzupartnerdemo.com/supply-chain/host/tap-install/partnertapdemo-testscanpolicy
+```execute
+tanzu apps workload tail dev --namespace tap-workload --timestamp --since 1h
+```
+
+```execute
+<ctrl+c>
+```
+
+```execute
+tanzu apps workload get dev -n tap-workload
 ```
 
 ref Image: ![Scanpolicy](images/scan-3.png)
 
-
-ref Image: ![Scanpolicy](images/scan-5.png)
-
 ###### Verify in TAP GUI Supply chain status: 
 
-```dashboard:open-url
-url: http://tap-gui.{{ session_namespace }}.demo.tanzupartnerdemo.com/supply-chain/host/tap-install/partnertapdemo-testscanpolicy
+```dashboard:open-url - App Stream
+url: https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/supply-chain/host/tap-workload/dev
 ```
 
-ref Image: ![Scanpolicy](images/scan-6.png)
+ref Image: ![Scanpolicy](images/scan-4.png)
 
-```execute
-kubectl get svc envoy -n tanzu-system-ingress -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
-```
-
-```terminal:interrupt
-session: 2
-```
-
-ref Image: ![Scanpolicy](images/scan-7.png)
 
 ```dashboard:open-url
-url: http://partnertapdemo-testscanpolicy.tap-install.{{ session_namespace }}.demo.tanzupartnerdemo.com
+url: https://dev.tap-workload.{{ session_namespace }}.tap.tanzupartnerdemo.com/
 ```
 
-ref Image: ![Scanpolicy](images/scan-8.png)
+ref Image: ![Scanpolicy](images/scan-5.png)
