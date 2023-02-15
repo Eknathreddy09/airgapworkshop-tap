@@ -251,13 +251,5 @@ sed -i -r "s/SESSION_NAME/$SESSION_NAME/g" $HOME/tap-values.yaml && sed -i -r "s
 ```
 
 ```execute
-sed -i -r "s/reposiliteairgap/$SESSION_NAME/g" $HOME/reprosilite.yaml
-```
-
-```execute
-sed -i -r "s/reposiliteurl/$SESSION_NAME/g" $HOME/settings-xml.yaml
-```
-
-```execute
-sed -i -r "s/SESSION_NAME/$SESSION_NAME/g" $HOME/listing.json
+sed -i -r "s/reposiliteairgap/$SESSION_NAME/g" $HOME/reprosilite.yaml && sed -i -r "s/reposiliteurl/$SESSION_NAME/g" $HOME/settings-xml.yaml && sed -i -r "s/SESSION_NAME/$SESSION_NAME/g" $HOME/listing.json
 ```
