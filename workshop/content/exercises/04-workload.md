@@ -190,7 +190,7 @@ cd .. && flux create secret git git-secret -u root -p Newstart1 --ca-file=gitea.
 ##### Deploy a workload ({{ session_namespace }}-git) by pointing to Gitlab project: 
 
 ```execute
-tanzu apps workload create gitapp --git-repo https://gitlab.tap.tanzupartnerdemo.com/gitlab-instance-081097ef/$SESSION_NAME-repo  --git-branch main --type web -n tap-workload --label apps.tanzu.vmware.com/has-tests=true --label app.kubernetes.io/part-of={{ session_namespace }} --param-yaml buildServiceBindings='[{"name": "settings-xml", "kind": "Secret"}, {"name": "ca-certificate", "kind": "Secret"}]' --build-env "BP_MAVEN_BUILD_ARGUMENTS=-debug -Dmaven.test.skip=true --no-transfer-progress package" -y
+tanzu apps workload create git --git-repo https://gitlab.tap.tanzupartnerdemo.com/gitlab-instance-081097ef/$SESSION_NAME-repo  --git-branch main --type web -n tap-workload --label apps.tanzu.vmware.com/has-tests=true --label app.kubernetes.io/part-of={{ session_namespace }} --param-yaml buildServiceBindings='[{"name": "settings-xml", "kind": "Secret"}, {"name": "ca-certificate", "kind": "Secret"}]' --build-env "BP_MAVEN_BUILD_ARGUMENTS=-debug -Dmaven.test.skip=true --no-transfer-progress package" -y
 ```
 
 ```execute
@@ -198,7 +198,7 @@ tanzu apps workload list -n tap-workload
 ```
 
 ```execute
-tanzu apps workload tail gitapp --namespace tap-workload
+tanzu apps workload tail git --namespace tap-workload
 ```
 
 ![Workload](images/airgap-94.png)
@@ -208,19 +208,19 @@ tanzu apps workload tail gitapp --namespace tap-workload
 ```
 
 ```execute
-tanzu apps workload get gitapp -n tap-workload
+tanzu apps workload get git -n tap-workload
 ```
 
 ![Workload](images/airgap-93.png)
 
-<p style="color:blue"><strong> Access the deployed application in App Stream browser- https://gitapp.tap-workload.{{ session_namespace }}.tap.tanzupartnerdemo.com {{copy}} </strong></p>
+<p style="color:blue"><strong> Access the deployed application in App Stream browser- https://git.tap-workload.{{ session_namespace }}.tap.tanzupartnerdemo.com {{copy}} </strong></p>
 
 ![Workload](images/airgap-96.png)
 
 ###### Apply Annotation
 
 ```execute
-tanzu apps workload apply gitapp --annotation autoscaling.knative.dev/minScale=1 -n tap-workload -y
+tanzu apps workload apply git --annotation autoscaling.knative.dev/minScale=1 -n tap-workload -y
 ```
 
 ### Pre-build image: 
