@@ -70,7 +70,7 @@ url: https://appstream2.us-west-2.aws.amazon.com/userpools#/signin?ref=zla9Qvv2b
 
 ![Local host](images/airgap-111.png)
 
-###### Once the DNS record is created for Reposilite, access the reposilite url from App Stream browser: https://reposilite.{{ session_namespace }}.tap.tanzupartnerdemo.com{{copy}} using Chrome Browser (incongnito preferred)
+###### Once the DNS record is created for Reposilite, access the reposilite url from App Stream browser: https://reposilite.{{ session_namespace }}.tap.tanzupartnerdemo.com {{copy}} using Chrome Browser (incongnito preferred)
 
 ![Local host](images/airgap-112.png)
 
@@ -196,7 +196,7 @@ kubectl cp $HOME/vulnerability-db_v5_2023-02-08T08-17-20Z_6ef73016d160043c630f.t
 kubectl cp listing.json $reposilitepod:/app/data/repositories/releases -n reposilite
 ```
 
-##### Access the reposilite url from App Stream browser: https://reposilite.{{ session_namespace }}.tap.tanzupartnerdemo.com/#/releases{{copy}} and verify the copied files under releases as shown below: 
+##### Access the reposilite url from App Stream browser: https://reposilite.{{ session_namespace }}.tap.tanzupartnerdemo.com/#/releases {{copy}} and verify the copied files under releases as shown below: 
 
 ![Local host](images/airgap-113.png)
 
