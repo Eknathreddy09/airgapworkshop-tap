@@ -12,7 +12,7 @@
 8. Explore Service Bindings and Grype
 9. Deploy metadata store with external DB
 10. Security Analysis
-11. Inner Loop
+11. Use case of OOTB - Scan
 
 ###### For more info, refer to VMware official documentation on TAP 1.4: 
 
