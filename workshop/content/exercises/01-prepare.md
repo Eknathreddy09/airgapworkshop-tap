@@ -79,7 +79,7 @@ export IMGPKG_REGISTRY_PASSWORD=Harbor12345
 export IMGPKG_REGISTRY_HOSTNAME=harborairgap.tanzupartnerdemo.com
 ```
 
-```execute-2
+```execute-all
 export TAP_VERSION=1.4.0
 ```
 
