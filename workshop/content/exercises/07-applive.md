@@ -6,7 +6,7 @@ Application Live View shows an individual running process: Before proceeding fur
 nslookup appliveview.{{ session_namespace }}.tap.tanzupartnerdemo.com	
 ```
 
-<p style="color:blue"><strong> Connect to TAP GUI from in App Stream browser by accessing the url: https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/catalog/default/component/{{ session_namespace }}/workloads </strong></p>
+<p style="color:blue"><strong> Connect to TAP GUI from in App Stream browser by accessing the url: https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com/catalog/default/component/{{ session_namespace }}/workloads {{ copy }} </strong></p>
 
 ###### In Tap GUI, Click on deployment resource as shown below: 
 
