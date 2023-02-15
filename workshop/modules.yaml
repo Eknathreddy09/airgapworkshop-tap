@@ -31,12 +31,12 @@ modules:
         exit_sign: Service Binding
     exercises/09-servicebinding:
         name: Service Binding with Maria DB
-        exit_sign: Security Analysis
-    exercises/11-security-analysis:
-        name: Security Analysis
         exit_sign: Grype
-    exercises/12-grype:
+    exercises/11-grype:
         name: Grype
+        exit_sign: Security Analysis
+    exercises/12-security-analysis:
+        name: Security Analysis
         exit_sign: External DB
     exercises/13-externaldb:
         name: External DB for Metadata store
