@@ -31,9 +31,6 @@ modules:
         exit_sign: Service Binding
     exercises/09-servicebinding:
         name: Service Binding with Maria DB
-        exit_sign: GitOps
-    exercises/10-gitopsworkflow:
-        name: GitOps workflow
         exit_sign: Security Analysis
     exercises/11-security-analysis:
         name: Security Analysis
@@ -46,9 +43,6 @@ modules:
         exit_sign: Scan Test
     exercises/14-testscan:
         name: Use Case on OOTB Scan
-        exit_sign: Innerloop
-    exercises/15-Innerloop:
-        name: Inner Loop
         exit_sign: Cleanup
     exercises/16-Cleanup:
         name: Cleanup
