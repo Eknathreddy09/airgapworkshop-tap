@@ -1,65 +1,68 @@
 
-For this workshop, I have already downloaded the required Maria DB image from VMware Application Catalog and uploaded into Harbor Registry. 
+For this workshop, I have already downloaded the required Maria DB image from **VMware Application Catalog** and uploaded into Harbor Registry. 
 
-<p style="color:blue"><strong>  </strong></p>
+<p style="color:blue"><strong> Review the Mariadb install file </strong></p>
 
 ```execute
 cat $HOME/mariadb-install.yaml
 ```
 
-<p style="color:blue"><strong> Review below yaml files </strong></p>
+<p style="color:blue"><strong> Review workload yaml file </strong></p>
 
 ```execute
 cat $HOME/workload-springpetclinic.yaml
 ```
 
-<p style="color:blue"><strong> Review below yaml files </strong></p>
+<p style="color:blue"><strong> Create MariaDB resources in tap-workload namespace </strong></p>
 
 ```execute
 kubectl apply -f $HOME/mariadb-install.yaml -n tap-workload
 ```
-<p style="color:blue"><strong> Review below yaml files </strong></p>
+<p style="color:blue"><strong> List the pods in tap-workload namespace </strong></p>
 
 ```execute
 kubectl get pods -n tap-workload
 ```
-<p style="color:blue"><strong> Review below yaml files </strong></p>
+<p style="color:blue"><strong> Get the deployed MariaDB pod name </strong></p>
 
 ```execute
 dbpod=$(kubectl get pods -n tap-workload --no-headers=true | awk '/db/{print $1}' | xargs)
-```
-<p style="color:blue"><strong> Review below yaml files </strong></p>
-
-```execute
 echo $dbpod
 ```
-<p style="color:blue"><strong> Review below yaml files </strong></p>
+
+<p style="color:blue"><strong> Connect to DB pod </strong></p>
 
 ```execute
 kubectl exec -it $dbpod -n tap-workload -- bash
 ```
-<p style="color:blue"><strong> Connect to DB, by providing the password as "secret" </strong></p>
+
+<p style="color:blue"><strong> Connect to DB by providing the password as "secret" </strong></p>
 
 ```execute
 mysql -h spring-petclinic-db -uroot -p
 ```
-<p style="color:blue"><strong> Review below yaml files </strong></p>
+
+<p style="color:blue"><strong> Show the created databases </strong></p>
 
 ```execute
 SHOW DATABASES;
 ```
 
-<p style="color:blue"><strong> Review below yaml files </strong></p>
+<p style="color:blue"><strong> Connect to DB "test" </strong></p>
 
 ```execute
 USE test;
 ```
+
+<p style="color:blue"><strong> Show the tables and you wont find any at this point of time </strong></p>
 
 ```execute
 SHOW TABLES;
 ```
 
 ![Local host](images/db-1.png)
+
+<p style="color:blue"><strong> Grant required permissions for "test" DB </strong></p>
 
 ```execute
 GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' IDENTIFIED BY "pass";
@@ -73,13 +76,13 @@ GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' IDENTIFIED BY "pass";
 exit
 ```
 
+<p style="color:blue"><strong> Create a workload using the config that is pre created for this workshop </strong></p>
+
 ```execute
 tanzu apps workload apply -f $HOME/workload-springpetclinic.yaml --local-path $HOME/spring-petclinic-2.6.0-SNAPSHOT.jar --source-image harborairgap.tanzupartnerdemo.com/{{ session_namespace }}/spring-petclinic-source -n tap-workload --type web --label apps.tanzu.vmware.com/has-tests=true -y
 ```
 
-```execute
-tanzu apps workload get sbtest -n tap-workload
-```
+<p style="color:blue"><strong> Check the live progress of application, it should take around 5-10 to complete </strong></p>
 
 ```execute
 tanzu apps workload tail sbtest --since 10m --timestamp -n tap-workload
