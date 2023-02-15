@@ -12,7 +12,7 @@ Out of the box supply chains are provided with Tanzu Application Platform and th
       
 TAP also includes Out of the Box Templates and Out of the Box Delivery Basic. 
 
-##### For this workshop, we have deployed TAP using OOTB supply chain with basic. 
+##### For this workshop, we have deployed TAP using OOTB supply chain with Testing and Scanning. 
 
 ```editor:open-file
 file: ~/tap-values.yaml
@@ -25,7 +25,7 @@ line: 84
 tanzu apps cluster-supply-chain list
 ```
 
-##### Access TAP GUI from App Stream browser: https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com , Navigate to Supply Chains and click on {{ session_namespace }}-git
+##### Access TAP GUI from App Stream browser: https://tap-gui.{{ session_namespace }}.tap.tanzupartnerdemo.com {{ copy }}, Navigate to Supply Chains and click on git
 
 There are two sections within this view:
 
@@ -53,7 +53,7 @@ The **Source Tester** step is responsible for doing source code tests. It uses a
 
 The **Source Scanner** step is responsible for doing source code scans using **Grype**.
 
-![Image Builder](images/scc-image-builder.png)
+![Image Provider](images/scc-image-builder.png)
 
 The **Image Builder** step is responsible for producing the container image runtime for the application. The default implementation of Image Builder uses **Tanzu Build Service**. We saw how Tanzu Build Service simplified container creation for Cody the developer during iterative development, but it is especially powerful when used in a Supply Chain. Tanzu Application platform continually publishes security fixes and version updates for the buildpacks and OS images used for container creation, and it can automatically trigger patching and rebuilds of the container images without any intervention from developers or operators.
 
@@ -71,6 +71,10 @@ The **Config Provider** step uses a Tanzu Application Platform component called 
 ![App Config](images/scc-app-config.png)
 
 The **App Config** step will output a complete specification of the Kubernetes resources needed to deploy the application onto a target cluster. The default implementation uses a Knative service for deployment, which simplifies zero-downtime updates and autoscaling. The resources generated here will include the reference to the container image produced by **Tanzu Build Service**, and the customizations provided by **Convention Service**
+
+![Service Bindings](images/service-bindings.png)
+
+![Api Descriptors](images/scc-api-descriptors.png)
 
 ![Config Writer](images/scc-config-writer.png)
 
