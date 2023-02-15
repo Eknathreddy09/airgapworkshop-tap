@@ -55,7 +55,9 @@ The **Source Scanner** step is responsible for doing source code scans using **G
 
 ![Image Provider](images/scc-image-builder.png)
 
-The **Image Builder** step is responsible for producing the container image runtime for the application. The default implementation of Image Builder uses **Tanzu Build Service**. We saw how Tanzu Build Service simplified container creation for Cody the developer during iterative development, but it is especially powerful when used in a Supply Chain. Tanzu Application platform continually publishes security fixes and version updates for the buildpacks and OS images used for container creation, and it can automatically trigger patching and rebuilds of the container images without any intervention from developers or operators.
+In Tanzu Application Platform (TAP), an **image provider** is a source of container images that can be used to deploy and run applications. An image provider typically consists of a container registry that stores container images, along with an API that allows TAP to access and manage those images.
+
+One of the benefits of using image providers in TAP is that they provide a consistent and reliable way to manage and deploy container images. By using a container registry or other image provider, developers can ensure that the images they are using are up-to-date and secure, and they can rely on TAP to manage the images and handle versioning and updates.
 
 ![Image Scanner](images/scc-image-scanner.png)
 
@@ -74,7 +76,15 @@ The **App Config** step will output a complete specification of the Kubernetes r
 
 ![Service Bindings](images/service-bindings.png)
 
+**Service binding** is a mechanism that allows an application to discover and connect to external services, such as databases or messaging systems, that are running outside the Kubernetes cluster.
+
+TAP provides a Service Broker that exposes external services to Kubernetes as Service instances. When an application requests a Service instance, TAP uses the Service Binding API to bind the Service instance to the application. This creates a set of environment variables and files that the application can use to connect to the Service instance.
+
 ![Api Descriptors](images/scc-api-descriptors.png)
+
+**API descriptors** are a feature in Tanzu Application Platform (TAP) that enables developers to define and version their APIs using OpenAPI specifications. An API descriptor is a YAML or JSON file that describes the endpoints, operations, and data models of an API.
+
+API descriptors in TAP are used to generate documentation, client libraries, and server code for the API. By defining an API using an OpenAPI specification, developers can ensure that their API is consistent and well-documented, and they can use tools like Swagger UI or ReDoc to provide interactive documentation for their API.
 
 ![Config Writer](images/scc-config-writer.png)
 
