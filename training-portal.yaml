@@ -1,0 +1,23 @@
+apiVersion: learningcenter.tanzu.vmware.com/v1beta1
+kind: TrainingPortal
+metadata:
+  name: tap-airgap
+  annotations:
+    kapp.k14s.io/update-strategy: always-replace
+spec:
+  portal:
+    title: Tanzu Application Platform Demos
+    password: Welcome11!
+    registration:
+      type: anonymous
+      enabled: true
+    updates:
+      workshop: true
+    sessions:
+      maximum: 15
+  workshops:
+    - name: tapworkshop-airgap
+      expires: 360m
+      orphaned: 120m
+      capacity: 15
+      reserved: 5
