@@ -1,0 +1,25 @@
+apiVersion: learningcenter.tanzu.vmware.com/v1beta1
+kind: Workshop
+metadata:
+  name: tapworkshop-airgap
+spec:
+  title: TAP Workshop - Airgap
+  description: An introduction to the Tanzu Application Platform Airgap environment
+  vendor: eduk8s.io
+  difficulty: beginner
+  duration: 15m
+  url: https://github.com/Tanzu-Partner-SE/TAP-WORKSHOP-AIRGAP
+  content:
+     files: https://<redacted>:x-oauth-basic@github.com/Tanzu-Partner-SE/TAP-WORKSHOP-AIRGAP/tarball/main?path=--anchored
+     image: tanzupartnerworkshop.azurecr.io/tapworkshop-airgap:v8
+  session:
+    namespaces:
+      budget: small
+    applications:
+      terminal:
+        enabled: true
+        layout: split
+      console:
+        enabled: true
+      editor:
+        enabled: true
